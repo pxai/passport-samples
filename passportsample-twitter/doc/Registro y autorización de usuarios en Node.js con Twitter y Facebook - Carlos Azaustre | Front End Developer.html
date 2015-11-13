@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html id="ie8" lang="es-ES">
+<![endif]-->
+<!--[if !(IE 8) ]><!-->
+<html lang="es-ES"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- 	This file is part of a WordPress theme for sale at ThemeForest.net.
+		See: http://themeforest.net/item/keilir-responsive-wordpress-blog-theme/4893662
+		Copyright 2013 Bluthemes 	-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registro y autorización de usuarios en Node.js con Twitter y Facebook - Carlos Azaustre | Front End Developer</title><link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://carlosazaustre.es/blog/xmlrpc.php">
+<!--[if lt IE 9]>
+<script src="http://carlosazaustre.es/blog/wp-content/themes/keilir/assets/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+<script src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/a_003.html" async=""></script><script async="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/cbgapi.loaded_1"></script><script async="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/cbgapi.loaded_0"></script><script gapi_processed="true" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/plusone.js" async="" type="text/javascript"></script><script gapi_processed="true" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/plusone.js" async="" type="text/javascript"></script><script src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/all.js" id="facebook-jssdk"></script><script src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/widgets.js" id="twitter-wjs"></script><script src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/dc.js" async="" type="text/javascript"></script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7491075-8']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.5.4.2 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="http://carlosazaustre.es/blog/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/">
+<link rel="author" href="https://plus.google.com/110321468139656319367/">
+<link rel="publisher" href="http://+carlosazaustre/">
+<!-- / Yoast WordPress SEO plugin. -->
+
+<link rel="alternate" type="application/rss+xml" title="Carlos Azaustre | Front End Developer » Feed" href="http://carlosazaustre.es/blog/feed/">
+<link rel="alternate" type="application/rss+xml" title="Carlos Azaustre | Front End Developer » RSS de los comentarios" href="http://carlosazaustre.es/blog/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Carlos Azaustre | Front End Developer » Registro y autorización de usuarios en Node.js con Twitter y Facebook RSS de los comentarios" href="http://carlosazaustre.es/blog/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/feed/">
+<link rel="stylesheet" id="cntctfrm_stylesheet-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="ts_fab_css-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/ts-fab.css" type="text/css" media="all">
+<link rel="stylesheet" id="hupso_css-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/style_003.css" type="text/css" media="all">
+<link rel="stylesheet" id="keilir-bootstrap-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" id="keilir-style-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/style_002.css" type="text/css" media="all">
+<link rel="stylesheet" id="keilir-responsive-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/style-responsive.css" type="text/css" media="all">
+<link rel="stylesheet" id="keilir-fontello-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/fontello.css" type="text/css" media="all">
+<link rel="stylesheet" id="keilir-nivo-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/nivo-slider.css" type="text/css" media="all">
+<link rel="stylesheet" id="keilir-magnific-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/magnific-popup.css" type="text/css" media="all">
+<link rel="stylesheet" id="keilir-snippet-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/jquery.css" type="text/css" media="all">
+<link rel="stylesheet" id="keilir-googlefonts-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/css.css" type="text/css" media="all">
+<link rel="stylesheet" id="sunprettify_style-css" href="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/sunburst.css" type="text/css" media="all">
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/jquery_003.js"></script>
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/jquery-migrate.js"></script>
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/ts-fab.js"></script>
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/highlight.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://carlosazaustre.es/blog/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://carlosazaustre.es/blog/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 3.9.2">
+<link rel="shortlink" href="http://carlosazaustre.es/blog/?p=659">
+
+<style>
+h1,h2,h3,h4,h5{font-family: "Raleway",serif;} .widget_calendar table > caption{font-family: "Raleway",serif;} body{font-family: "Raleway",Helvetica,sans-serif;} .navbar .nav > li > a, .navbar .brand p{font-family: "Raleway",Helvetica,sans-serif;} .navbar .brand-text{font-family: "Raleway",Helvetica,sans-serif;} </style>
+<link rel="Shortcut Icon" type="image/x-icon" href="http://carlosazaustre.es/blog/wp-content/uploads/2014/08/favicon1.png"><style type="text/css">
+	.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{ background: rgba(0,0,0,0.05); }body{ background: #eaeaea; } header.entry-header{ background: #f05a49; } .dropdown-menu,header#masthead,.navbar-inverse .navbar-inner{ background: #ffffff; } div.navbar-inverse .nav-collapse .nav > li > a, .navbar-inverse .nav-collapse .dropdown-menu a{color:#666666!important; } .widget-head{ background: #f05a49; } .widget-head{color:#ffffff;} footer.site-footer{ background:#334b5e;} .post-format-standard{background-color: #f05a49}.tab_standard{background-color:#f05a49;}.format-standard .entry-content .post-meta ~ * a, .format-standard .entry-content .post-meta a:hover, .format-standard .entry-content .entry-title a:hover{color: #f05a49;} #related-posts .box.related-standard{border-top: 3px solid #f05a49;}.post-format-gallery{background-color: #4782A6}.tab_gallery{background-color:#4782A6;}.format-gallery .entry-content .post-meta ~ * a, .format-gallery .entry-content .post-meta a:hover, .format-gallery .entry-content .entry-title a:hover{color: #4782A6; }#related-posts .box.related-gallery{border-top: 3px solid #4782A6;}.post-format-image{background-color: #f05a49}.tab_image{background-color:#f05a49;}.format-image .entry-content .post-meta ~ * a, .format-image .entry-content .post-meta a:hover, .format-image .entry-content .entry-title a:hover{color: #f05a49;} #related-posts .box.related-image{border-top: 3px solid #f05a49;}.post-format-link{background-color: #9664B5}.tab_link{background-color:#9664B5;}.format-link .entry-content .post-meta ~ * a, .format-link .entry-content .post-meta a:hover, .format-link .entry-content .entry-title a:hover{color: #9664B5;} #related-posts .box.related-link{border-top: 3px solid #9664B5;}.post-format-quote{background-color: #85A9B3}.tab_quote{background-color:#85A9B3;}.format-quote .entry-content .post-meta ~ * a, .format-quote .entry-content .post-meta a:hover, .format-quote .entry-content .entry-title a:hover{color: #85A9B3;} #related-posts .box.related-quote{border-top: 3px solid #85A9B3;}.post-format-audio{background-color: #EF7336}.tab_audio{background-color:#EF7336;}.format-audio .entry-content .post-meta ~ * a, .format-audio .entry-content .post-meta a:hover, .format-audio .entry-content .entry-title a:hover{color: #EF7336;} #related-posts .box.related-audio{border-top: 3px solid #EF7336;}.post-format-video{background-color: #ffc04e}.tab_video{background-color:#ffc04e;}.format-video .entry-content .post-meta ~ * a, .format-video .entry-content .post-meta a:hover, .format-video .entry-content .entry-title a:hover{color: #ffc04e;} #related-posts .box.related-video{border-top: 3px solid #ffc04e;}.post-format-facebook{background-color: #49659F}.tab_facebook{background-color:#49659F;}.format-facebook .entry-content .post-meta ~ * a, .format-facebook .entry-content .post-meta a:hover, .format-facebook .entry-content .entry-title a:hover{color: #49659F;} #related-posts .box.related-facebook{border-top: 3px solid #49659F;}.post-format-twitter{background-color: #00ACED}.tab_twitter{background-color:#00ACED;}.format-twitter .entry-content .post-meta ~ * a, .format-twitter .entry-content .post-meta a:hover, .format-twitter .entry-content .entry-title a:hover{color: #00ACED;} #related-posts .box.related-twitter{border-top: 3px solid #00ACED;}.sticky .post-format-badge{background-color: #585756}.sticky .entry-content .post-meta ~ * a, .sticky .entry-content .post-meta a:hover, .sticky .entry-content .entry-title a:hover{color: #585756;}.entry-title,.post-meta,.status-content{text-align:center;}.status-content iframe{margin:0 auto!important;}.post-meta ul{display: inline-block;}.format-quote .entry-title{text-align:left;}.top-color .first_col{background: #f05a49;}.top-color .second_col{background: #49bc7a;}.top-color .third_col{background: #1378ae;}.top-color .fourth_col{background: #ffc04e;}.entry-title{font-size: 38px;}.entry-content p{font-size: 18px;}body{font-size: 16px;}article.type-page .title{font-size: 38px;}.the-content, .the-content p{font-size: 18px;}.btn-primary {
+  background-color: #1291d0 !important;
+}
+
+.btn-navbar {
+  background: one repeat scroll 0 0 #1291d0 !important;
+background-color: #1291d0 !important;
+}
+
+#masthead #searchform input[type="text"] {
+  background: #eaeaea;
+}</style>
+<script src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/secureAnonymousFramework"></script><script src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/embed.js" async="" type="text/javascript"></script><style type="text/css">* html #li_ui_li_gen_1407969171605_0 a#li_ui_li_gen_1407969171605_0-link{height:1% !important;}#li_ui_li_gen_1407969171605_0{position:relative !important;overflow:visible !important;display:block !important;}#li_ui_li_gen_1407969171605_0 span{-webkit-box-sizing:content-box !important;-moz-box-sizing:content-box !important;box-sizing:content-box !important;}#li_ui_li_gen_1407969171605_0 a#li_ui_li_gen_1407969171605_0-link{border:0 !important;height:20px !important;text-decoration:none !important;padding:0 !important;margin:0 !important;display:inline-block !important;}#li_ui_li_gen_1407969171605_0 a#li_ui_li_gen_1407969171605_0-link:link, #li_ui_li_gen_1407969171605_0 a#li_ui_li_gen_1407969171605_0-link:visited, #li_ui_li_gen_1407969171605_0 a#li_ui_li_gen_1407969171605_0-link:hover, #li_ui_li_gen_1407969171605_0 a#li_ui_li_gen_1407969171605_0-link:active{border:0 !important;text-decoration:none !important;}#li_ui_li_gen_1407969171605_0 a#li_ui_li_gen_1407969171605_0-link:after{content:"." !important;display:block !important;clear:both !important;visibility:hidden !important;line-height:0 !important;height:0 !important;}#li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-logo{background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-position:0px -276px !important;background-repeat:no-repeat !important;background-size:initial !important;cursor:pointer !important;border:0 !important;text-indent:-9999em !important;overflow:hidden !important;padding:0 !important;margin:0 !important;position:absolute !important;left:0px !important;top:0px !important;display:block !important;width:20px !important;height:20px !important;float:right !important;border-radius:0 !important;-moz-border-radius:0 !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-moz-border-radius-topright:2px !important;-moz-border-radius-bottomright:2px !important;}#li_ui_li_gen_1407969171605_0.hovered #li_ui_li_gen_1407969171605_0-logo{background-position:-20px -276px !important;}#li_ui_li_gen_1407969171605_0.clicked #li_ui_li_gen_1407969171605_0-logo, #li_ui_li_gen_1407969171605_0.down #li_ui_li_gen_1407969171605_0-logo{background-position:-40px -276px !important;}.IN-shadowed #li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-logo{}#li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-title{color:#333 !important;cursor:pointer !important;display:block !important;white-space:nowrap !important;float:left !important;margin-left:1px !important;vertical-align:top !important;overflow:hidden !important;text-align:center !important;height:18px !important;padding:0 4px 0 23px !important;border:1px solid #000 !important;border-top-color:#E2E2E2 !important;border-right-color:#BFBFBF !important;border-bottom-color:#B9B9B9 !important;border-left-color:#E2E2E2 !important;border-left:0 !important;text-shadow:#FFFFFF -1px 1px 0 !important;line-height:20px !important;border-radius:0 !important;-moz-border-radius:0 !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-moz-border-radius-topright:2px !important;-moz-border-radius-bottomright:2px !important;background-color:#ECECEC !important;background-image:-moz-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;}#li_ui_li_gen_1407969171605_0.hovered #li_ui_li_gen_1407969171605_0-title{border:1px solid #000 !important;border-top-color:#ABABAB !important;border-right-color:#9A9A9A !important;border-bottom-color:#787878 !important;border-left-color:#04568B !important;border-left:0 !important;background-color:#EDEDED !important;background-image:-moz-linear-gradient(top, #EDEDED 0%, #DEDEDE 100%) !important;}#li_ui_li_gen_1407969171605_0.clicked #li_ui_li_gen_1407969171605_0-title, #li_ui_li_gen_1407969171605_0.down #li_ui_li_gen_1407969171605_0-title{color:#666 !important;border:1px solid #000 !important;border-top-color:#B6B6B6 !important;border-right-color:#B3B3B3 !important;border-bottom-color:#9D9D9D !important;border-left-color:#49627B !important;border-left:0 !important;background-color:#DEDEDE !important;background-image:-moz-linear-gradient(top, #E3E3E3 0%, #EDEDED 100%) !important;}.IN-shadowed #li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-title{}.IN-shadowed #li_ui_li_gen_1407969171605_0.hovered #li_ui_li_gen_1407969171605_0-title{}.IN-shadowed #li_ui_li_gen_1407969171605_0.clicked #li_ui_li_gen_1407969171605_0-title, .IN-shadowed #li_ui_li_gen_1407969171605_0.down #li_ui_li_gen_1407969171605_0-title{}#li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-title-text, #li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-title-text *{color:#333 !important;font-size:11px !important;font-family:Arial, sans-serif !important;font-weight:bold !important;font-style:normal !important;-webkit-font-smoothing:antialiased !important;display:inline-block !important;background:transparent none !important;vertical-align:top !important;height:18px !important;line-height:20px !important;float:none !important;}#li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-title-text strong{font-weight:bold !important;}#li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-title-text em{font-style:italic !important;}#li_ui_li_gen_1407969171605_0.hovered #li_ui_li_gen_1407969171605_0-title-text, #li_ui_li_gen_1407969171605_0.hovered #li_ui_li_gen_1407969171605_0-title-text *{color:#000 !important;}#li_ui_li_gen_1407969171605_0.clicked #li_ui_li_gen_1407969171605_0-title-text, #li_ui_li_gen_1407969171605_0.down #li_ui_li_gen_1407969171605_0-title-text, #li_ui_li_gen_1407969171605_0.clicked #li_ui_li_gen_1407969171605_0-title-text *, #li_ui_li_gen_1407969171605_0.down #li_ui_li_gen_1407969171605_0-title-text *{color:#666 !important;}#li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-title #li_ui_li_gen_1407969171605_0-mark{display:inline-block !important;width:0px !important;overflow:hidden !important;}.success #li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-title{color:#333 !important;border-top-color:#E2E2E2 !important;border-right-color:#BFBFBF !important;border-bottom-color:#B9B9B9 !important;border-left-color:#E2E2E2 !important;background-color:#ECECEC !important;background-image:-moz-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;}.success #li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-title-text, .success #li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-title-text *{color:#333 !important;}.IN-shadowed .success #li_ui_li_gen_1407969171605_0 #li_ui_li_gen_1407969171605_0-title{}.success #li_ui_li_gen_1407969171605_0.hovered #li_ui_li_gen_1407969171605_0-title{color:#000 !important;border-top-color:#ABABAB !important;border-right-color:#9A9A9A !important;border-bottom-color:#787878 !important;border-left-color:#04568B !important;background-color:#EDEDED !important;background-image:-moz-linear-gradient(top, #EDEDED 0%, #DEDEDE 100%) !important;}.success #li_ui_li_gen_1407969171605_0.hovered #li_ui_li_gen_1407969171605_0-title-text, .success #li_ui_li_gen_1407969171605_0.hovered #li_ui_li_gen_1407969171605_0-title-text *{color:#000 !important;}.success #li_ui_li_gen_1407969171605_0.clicked #li_ui_li_gen_1407969171605_0-title, .success #li_ui_li_gen_1407969171605_0.down #li_ui_li_gen_1407969171605_0-title{color:#666 !important;border-top-color:#B6B6B6 !important;border-right-color:#B3B3B3 !important;border-bottom-color:#9D9D9D !important;border-left-color:#49627B !important;background-color:#DEDEDE !important;background-image:-moz-linear-gradient(top, #E3E3E3 0%, #EDEDED 100%) !important;}.success #li_ui_li_gen_1407969171605_0.clicked #li_ui_li_gen_1407969171605_0-title-text, .success #li_ui_li_gen_1407969171605_0.down #li_ui_li_gen_1407969171605_0-title-text, .success #li_ui_li_gen_1407969171605_0.clicked #li_ui_li_gen_1407969171605_0-title-text *, .success #li_ui_li_gen_1407969171605_0.down #li_ui_li_gen_1407969171605_0-title-text *{color:#666 !important;}.IN-shadowed .success #li_ui_li_gen_1407969171605_0.clicked #li_ui_li_gen_1407969171605_0-title, .IN-shadowed .success #li_ui_li_gen_1407969171605_0.down #li_ui_li_gen_1407969171605_0-title{}#li_ui_li_gen_1407969171702_1-container.IN-right {display:inline-block !important;float:left !important;overflow:visible !important;position:relative !important;height:18px !important;padding-left:2px !important;line-height:1px !important;cursor:pointer !important;}#li_ui_li_gen_1407969171702_1.IN-right {display:block !important;float:left !important;height:18px !important;margin-right:4px !important;padding-right:4px !important;background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-color:transparent !important;background-repeat:no-repeat !important;background-position:right -100px !important;}#li_ui_li_gen_1407969171702_1-inner.IN-right {display:block !important;float:left !important;padding-left:8px !important;text-align:center !important;background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-color:transparent !important;background-repeat:no-repeat !important;background-position:0px -60px !important;}#li_ui_li_gen_1407969171702_1-content.IN-right {display:inline !important;font-size:11px !important;color:#04558B !important;font-weight:bold !important;font-family:Arial, sans-serif !important;line-height:18px !important;padding:0 5px 0 5px !important;}#li_ui_li_gen_1407969171702_1-container.IN-empty {display:none !important;}#li_ui_li_gen_1407969171702_1-container.IN-hidden #li_ui_li_gen_1407969171702_1 {display:none !important;}* html #li_ui_li_gen_1407969171743_2 a#li_ui_li_gen_1407969171743_2-link{height:1% !important;}#li_ui_li_gen_1407969171743_2{position:relative !important;overflow:visible !important;display:block !important;}#li_ui_li_gen_1407969171743_2 span{-webkit-box-sizing:content-box !important;-moz-box-sizing:content-box !important;box-sizing:content-box !important;}#li_ui_li_gen_1407969171743_2 a#li_ui_li_gen_1407969171743_2-link{border:0 !important;height:20px !important;text-decoration:none !important;padding:0 !important;margin:0 !important;display:inline-block !important;}#li_ui_li_gen_1407969171743_2 a#li_ui_li_gen_1407969171743_2-link:link, #li_ui_li_gen_1407969171743_2 a#li_ui_li_gen_1407969171743_2-link:visited, #li_ui_li_gen_1407969171743_2 a#li_ui_li_gen_1407969171743_2-link:hover, #li_ui_li_gen_1407969171743_2 a#li_ui_li_gen_1407969171743_2-link:active{border:0 !important;text-decoration:none !important;}#li_ui_li_gen_1407969171743_2 a#li_ui_li_gen_1407969171743_2-link:after{content:"." !important;display:block !important;clear:both !important;visibility:hidden !important;line-height:0 !important;height:0 !important;}#li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-logo{background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-position:0px -276px !important;background-repeat:no-repeat !important;background-size:initial !important;cursor:pointer !important;border:0 !important;text-indent:-9999em !important;overflow:hidden !important;padding:0 !important;margin:0 !important;position:absolute !important;left:0px !important;top:0px !important;display:block !important;width:20px !important;height:20px !important;float:right !important;border-radius:0 !important;-moz-border-radius:0 !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-moz-border-radius-topright:2px !important;-moz-border-radius-bottomright:2px !important;}#li_ui_li_gen_1407969171743_2.hovered #li_ui_li_gen_1407969171743_2-logo{background-position:-20px -276px !important;}#li_ui_li_gen_1407969171743_2.clicked #li_ui_li_gen_1407969171743_2-logo, #li_ui_li_gen_1407969171743_2.down #li_ui_li_gen_1407969171743_2-logo{background-position:-40px -276px !important;}.IN-shadowed #li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-logo{}#li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-title{color:#333 !important;cursor:pointer !important;display:block !important;white-space:nowrap !important;float:left !important;margin-left:1px !important;vertical-align:top !important;overflow:hidden !important;text-align:center !important;height:18px !important;padding:0 4px 0 23px !important;border:1px solid #000 !important;border-top-color:#E2E2E2 !important;border-right-color:#BFBFBF !important;border-bottom-color:#B9B9B9 !important;border-left-color:#E2E2E2 !important;border-left:0 !important;text-shadow:#FFFFFF -1px 1px 0 !important;line-height:20px !important;border-radius:0 !important;-moz-border-radius:0 !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-moz-border-radius-topright:2px !important;-moz-border-radius-bottomright:2px !important;background-color:#ECECEC !important;background-image:-moz-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;}#li_ui_li_gen_1407969171743_2.hovered #li_ui_li_gen_1407969171743_2-title{border:1px solid #000 !important;border-top-color:#ABABAB !important;border-right-color:#9A9A9A !important;border-bottom-color:#787878 !important;border-left-color:#04568B !important;border-left:0 !important;background-color:#EDEDED !important;background-image:-moz-linear-gradient(top, #EDEDED 0%, #DEDEDE 100%) !important;}#li_ui_li_gen_1407969171743_2.clicked #li_ui_li_gen_1407969171743_2-title, #li_ui_li_gen_1407969171743_2.down #li_ui_li_gen_1407969171743_2-title{color:#666 !important;border:1px solid #000 !important;border-top-color:#B6B6B6 !important;border-right-color:#B3B3B3 !important;border-bottom-color:#9D9D9D !important;border-left-color:#49627B !important;border-left:0 !important;background-color:#DEDEDE !important;background-image:-moz-linear-gradient(top, #E3E3E3 0%, #EDEDED 100%) !important;}.IN-shadowed #li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-title{}.IN-shadowed #li_ui_li_gen_1407969171743_2.hovered #li_ui_li_gen_1407969171743_2-title{}.IN-shadowed #li_ui_li_gen_1407969171743_2.clicked #li_ui_li_gen_1407969171743_2-title, .IN-shadowed #li_ui_li_gen_1407969171743_2.down #li_ui_li_gen_1407969171743_2-title{}#li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-title-text, #li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-title-text *{color:#333 !important;font-size:11px !important;font-family:Arial, sans-serif !important;font-weight:bold !important;font-style:normal !important;-webkit-font-smoothing:antialiased !important;display:inline-block !important;background:transparent none !important;vertical-align:top !important;height:18px !important;line-height:20px !important;float:none !important;}#li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-title-text strong{font-weight:bold !important;}#li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-title-text em{font-style:italic !important;}#li_ui_li_gen_1407969171743_2.hovered #li_ui_li_gen_1407969171743_2-title-text, #li_ui_li_gen_1407969171743_2.hovered #li_ui_li_gen_1407969171743_2-title-text *{color:#000 !important;}#li_ui_li_gen_1407969171743_2.clicked #li_ui_li_gen_1407969171743_2-title-text, #li_ui_li_gen_1407969171743_2.down #li_ui_li_gen_1407969171743_2-title-text, #li_ui_li_gen_1407969171743_2.clicked #li_ui_li_gen_1407969171743_2-title-text *, #li_ui_li_gen_1407969171743_2.down #li_ui_li_gen_1407969171743_2-title-text *{color:#666 !important;}#li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-title #li_ui_li_gen_1407969171743_2-mark{display:inline-block !important;width:0px !important;overflow:hidden !important;}.success #li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-title{color:#333 !important;border-top-color:#E2E2E2 !important;border-right-color:#BFBFBF !important;border-bottom-color:#B9B9B9 !important;border-left-color:#E2E2E2 !important;background-color:#ECECEC !important;background-image:-moz-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;}.success #li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-title-text, .success #li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-title-text *{color:#333 !important;}.IN-shadowed .success #li_ui_li_gen_1407969171743_2 #li_ui_li_gen_1407969171743_2-title{}.success #li_ui_li_gen_1407969171743_2.hovered #li_ui_li_gen_1407969171743_2-title{color:#000 !important;border-top-color:#ABABAB !important;border-right-color:#9A9A9A !important;border-bottom-color:#787878 !important;border-left-color:#04568B !important;background-color:#EDEDED !important;background-image:-moz-linear-gradient(top, #EDEDED 0%, #DEDEDE 100%) !important;}.success #li_ui_li_gen_1407969171743_2.hovered #li_ui_li_gen_1407969171743_2-title-text, .success #li_ui_li_gen_1407969171743_2.hovered #li_ui_li_gen_1407969171743_2-title-text *{color:#000 !important;}.success #li_ui_li_gen_1407969171743_2.clicked #li_ui_li_gen_1407969171743_2-title, .success #li_ui_li_gen_1407969171743_2.down #li_ui_li_gen_1407969171743_2-title{color:#666 !important;border-top-color:#B6B6B6 !important;border-right-color:#B3B3B3 !important;border-bottom-color:#9D9D9D !important;border-left-color:#49627B !important;background-color:#DEDEDE !important;background-image:-moz-linear-gradient(top, #E3E3E3 0%, #EDEDED 100%) !important;}.success #li_ui_li_gen_1407969171743_2.clicked #li_ui_li_gen_1407969171743_2-title-text, .success #li_ui_li_gen_1407969171743_2.down #li_ui_li_gen_1407969171743_2-title-text, .success #li_ui_li_gen_1407969171743_2.clicked #li_ui_li_gen_1407969171743_2-title-text *, .success #li_ui_li_gen_1407969171743_2.down #li_ui_li_gen_1407969171743_2-title-text *{color:#666 !important;}.IN-shadowed .success #li_ui_li_gen_1407969171743_2.clicked #li_ui_li_gen_1407969171743_2-title, .IN-shadowed .success #li_ui_li_gen_1407969171743_2.down #li_ui_li_gen_1407969171743_2-title{}#li_ui_li_gen_1407969171766_3-container.IN-right {display:inline-block !important;float:left !important;overflow:visible !important;position:relative !important;height:18px !important;padding-left:2px !important;line-height:1px !important;cursor:pointer !important;}#li_ui_li_gen_1407969171766_3.IN-right {display:block !important;float:left !important;height:18px !important;margin-right:4px !important;padding-right:4px !important;background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-color:transparent !important;background-repeat:no-repeat !important;background-position:right -100px !important;}#li_ui_li_gen_1407969171766_3-inner.IN-right {display:block !important;float:left !important;padding-left:8px !important;text-align:center !important;background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-color:transparent !important;background-repeat:no-repeat !important;background-position:0px -60px !important;}#li_ui_li_gen_1407969171766_3-content.IN-right {display:inline !important;font-size:11px !important;color:#04558B !important;font-weight:bold !important;font-family:Arial, sans-serif !important;line-height:18px !important;padding:0 5px 0 5px !important;}#li_ui_li_gen_1407969171766_3-container.IN-empty {display:none !important;}#li_ui_li_gen_1407969171766_3-container.IN-hidden #li_ui_li_gen_1407969171766_3 {display:none !important;}</style><script src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/count.js" type="text/javascript" async=""></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fbpluginrecommendationsbarleft,.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}.fbpluginrecommendationsbarleft{left:10px}.fbpluginrecommendationsbarright{right:10px}</style><script src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/count-data.js" async=""></script><script charset="UTF-8" async="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/alfie.js"></script></head>
+<body data-twttr-rendered="true" class="single single-post postid-659 single-format-standard">
+
+	<script type="text/javascript">
+
+		jQuery(function(){
+			if(jQuery('.above_header').length > 0){
+
+				var height = jQuery('.above_header').height();
+			}else{
+				var height = 0;
+			}
+			jQuery('#masthead').affix({offset: height});
+		});
+
+	</script>
+<div style="background-image: url('http://carlosazaustre.es/blog/wp-content/themes/keilir/assets/img/pattern/large/noise_lines.png')" id="background_pattern"></div><div id="page" class="site">
+		<header class="affix" id="masthead" role="banner">
+				<div class="top-color clearfix">
+			<div class="first_col"></div>
+			<div class="second_col"></div>
+			<div class="third_col"></div>
+			<div class="fourth_col"></div>
+		</div>
+				<div class="container">
+
+			<div class="navbar navbar-inverse">
+			  <div class="navbar-inner">
+			    <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
+			    <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button"><i class="icon-menu-1"></i></button>
+				<a class="brand" href="http://carlosazaustre.es/blog/" title="Carlos Azaustre | Front End Developer" rel="home"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/logo_blog2.png" alt="Carlos Azaustre | Front End Developer"></a><div class="nav-collapse collapse"><ul id="menu-menu-1" class="nav"><li id="menu-item-773" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home"><a href="http://carlosazaustre.es/blog/">Inicio</a></li><li id="menu-item-778" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="http://www.redbubble.com/people/carlos-azaustre/shop">Camisetas Geeks</a></li><li id="menu-item-779" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="http://carlosazaustre.es/blog/ebook-angular">eBooks</a></li><li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://carlosazaustre.es/blog/contacto/">Contacto</a></li></ul></div>								<div class="bl_search nav-collapse collapse">
+					<form role="search" method="get" id="searchform" class="searchform" action="http://carlosazaustre.es/blog/">
+				<div>
+					<label class="screen-reader-text" for="s">Buscar:</label>
+					<input value="Search..." name="s" id="s" type="text">
+					<input id="searchsubmit" value="Buscar" type="submit">
+				</div>
+			</form>				</div>
+							  </div><!-- /.navbar-inner -->
+			</div>
+
+		</div>
+	</header><!-- #masthead .site-header -->
+	<div id="main" class="container">	<div id="primary" class="row layout_right_side">
+
+		<div id="content" class="span9" role="main">
+
+			
+				
+					<article id="post-659" class="post-659 post type-post status-publish format-standard hentry category-development category-tutorials tag-autenticacion tag-express tag-facebook tag-login tag-mongodb tag-mongoose tag-node tag-passport tag-social tag-twitter tag-usuarios">
+
+					<header class="entry-header">
+								<div class="post-format-badge post-format-badge-icons post-format-standard">
+		<i class="icon-code"></i>
+	</div>
+						</header><!-- .entry-header -->
+			<div class="entry-container">
+			<div class="entry-content">
+			<h1 class="entry-title"><a href="http://carlosazaustre.es/blog/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/">Registro y autorización de usuarios en Node.js con Twitter y Facebook</a></h1>
+			<div class="post-meta">
+				<ul>
+	<li><i class="icon-clock-1"></i> <time class="entry-date" datetime="2014-03-22T13:49:40+00:00">marzo 22, 2014</time></li>
+	<li><i class="icon-folder-1"></i> <a href="http://carlosazaustre.es/blog/category/development/" title="View all posts in Development">Development</a> <a href="http://carlosazaustre.es/blog/category/development/tutorials/" title="View all posts in Tutorials">Tutorials</a> </li>	<li><i class="icon-comment-1"></i> <a data-disqus-identifier="659 http://carlosazaustre.es/blog/?p=659" class="comment_count" data-post="659" href="http://carlosazaustre.es/blog/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/#disqus_thread">11 Comments</a></li>
+	<li><i class="icon-tag-1"></i> <a href="http://carlosazaustre.es/blog/tag/autenticacion/" rel="tag">autenticación</a>, <a href="http://carlosazaustre.es/blog/tag/express/" rel="tag">Express</a>, <a href="http://carlosazaustre.es/blog/tag/facebook/" rel="tag">facebook</a>, <a href="http://carlosazaustre.es/blog/tag/login/" rel="tag">login</a>, <a href="http://carlosazaustre.es/blog/tag/mongodb/" rel="tag">MongoDB</a>, <a href="http://carlosazaustre.es/blog/tag/mongoose/" rel="tag">Mongoose</a>, <a href="http://carlosazaustre.es/blog/tag/node/" rel="tag">Node</a>, <a href="http://carlosazaustre.es/blog/tag/passport/" rel="tag">passport</a>, <a href="http://carlosazaustre.es/blog/tag/social/" rel="tag">social</a>, <a href="http://carlosazaustre.es/blog/tag/twitter/" rel="tag">twitter</a>, <a href="http://carlosazaustre.es/blog/tag/usuarios/" rel="tag">usuarios</a></li></ul>
+			</div>
+			<div style="padding-bottom:20px; padding-top:10px;" class="hupso-share-buttons"><!-- Hupso Share Buttons - http://www.hupso.com/share/ --><a class="hupso_counters" href="http://www.hupso.com/share/"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/dot.png" style="border: 0px none; padding-top: 2px; float: left; margin: 0px; background-color: transparent; outline: medium none; box-shadow: none;" alt="Share Button"></a><script type="text/javascript">var hupso_services_c=new Array("twitter","facebook_like","google","linkedin");var hupso_twitter_via = "carlosazaustre";var hupso_counters_lang = "es_LA";var hupso_image_folder_url = "";var hupso_twitter_via="carlosazaustre";var hupso_url_c="";var hupso_title_c="Registro y autorización de usuarios en Node.js con Twitter y Facebook";</script><script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/counters.js"></script><div class="hupso_c" id="hupso_counters_0"><div style="display: inline-block;" id="counters_hupso_counters_0"><div style="float:left; margin-left:10px; width:90px;" class="hupso_twitter"><iframe style="width: 117px; height: 20px;" data-twttr-rendered="true" title="Twitter Tweet Button" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-horizontal" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/tweet_button.html" allowtransparency="true" id="twitter-widget-0" scrolling="no" frameborder="0"></iframe></div><div style="float:left; margin-left:10px; margin-right:15px;" class="hupso_facebook"><div fb-iframe-plugin-query="app_id=&amp;href=http%3A%2F%2Fcarlosazaustre.es%2Fblog%2Fregistro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook%2F&amp;layout=button_count&amp;locale=es_LA&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=180" fb-xfbml-state="rendered" class="fb-like fb_iframe_widget" data-href="http://carlosazaustre.es/blog/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/" data-send="false" data-layout="button_count" data-width="180" data-show-faces="false"><span style="vertical-align: bottom; width: 102px; height: 20px;"><iframe class="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/like.html" style="border: medium none; visibility: visible; width: 102px; height: 20px;" title="fb:like Facebook Social Plugin" allowtransparency="true" name="f3ade05e2f1aa9c" scrolling="no" width="180px" frameborder="0" height="1000px"></iframe></span></div><div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/FX-Xf5fQjUk.html" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_http" allowtransparency="true" name="fb_xdm_frame_http" scrolling="no" frameborder="0"></iframe><iframe src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/FX-Xf5fQjUk_002.html" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_https" allowtransparency="true" name="fb_xdm_frame_https" scrolling="no" frameborder="0"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div></div><div style="float:left; margin-left:10px; width:80px;" class="hupso_google"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px;"><iframe title="+1" data-gapiattached="true" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/fastbutton.html" name="I0_1407969173193" id="I0_1407969173193" vspace="0" tabindex="0" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" marginwidth="0" marginheight="0" hspace="0" scrolling="no" width="100%" frameborder="0"></iframe></div></div><div style="float:left; margin-left:10px;" class="hupso_linkedin"></div><script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><script type="text/javascript">(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&status=0"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk')); </script><span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0px ! important; margin: 0px ! important; text-indent: 0px ! important; display: inline-block ! important; vertical-align: baseline ! important; font-size: 1px ! important;"><span id="li_ui_li_gen_1407969171605_0"><a id="li_ui_li_gen_1407969171605_0-link" href="javascript:void(0);"><span id="li_ui_li_gen_1407969171605_0-logo">in</span><span id="li_ui_li_gen_1407969171605_0-title"><span id="li_ui_li_gen_1407969171605_0-mark"></span><span id="li_ui_li_gen_1407969171605_0-title-text">Share</span></span></a></span></span><span style="padding: 0px ! important; margin: 0px ! important; text-indent: 0px ! important; display: inline-block ! important; vertical-align: baseline ! important; font-size: 1px ! important;"><span id="li_ui_li_gen_1407969171702_1-container" class="IN-right"><span id="li_ui_li_gen_1407969171702_1" class="IN-right"><span id="li_ui_li_gen_1407969171702_1-inner" class="IN-right"><span id="li_ui_li_gen_1407969171702_1-content" class="IN-right">10</span></span></span></span></span></span><script data-counter="right" data-url="http://carlosazaustre.es/blog/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/" type="IN/Share+init">window.___gcfg = {lang: 'es'}; (function() {var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();</script><script src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/in.js" type="text/javascript"></script></div></div><!-- Hupso Share Buttons --></div><p>El <a href="https://plus.google.com/u/0/events/cpnqtgo6f86l2e3975p2o7lfal0">pasado viernes</a> me ofrecieron impartir una <strong>clase BONUS</strong> en la plataforma de estudiantes de los cursos de <a href="http://mejorando.la/cursos">Mejorando.la</a>.</p>
+<p>El tema que elegimos fue como implementar un<strong> sistema de login de usuarios utilizando plataformas sociales</strong> (<strong>Twitter</strong> y <strong>Facebook</strong>) y empleando<strong> Node.js</strong> en el Backend.</p>
+<p>Esta fue la presentación que utilicé en la exposición</p>
+<p><iframe style="border: 1px solid #CCC; border-width: 1px 1px 0; margin-bottom: 5px; max-width: 100%;" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/32595306.html" allowfullscreen="" marginwidth="0" marginheight="0" scrolling="no" width="425" frameborder="0" height="355"></iframe></p>
+<div style="margin-bottom: 5px;"><strong> <a title="Login social con node.js" href="https://www.slideshare.net/CarlosAzaustre/login-social-con-nodejs" target="_blank">Login social con node.js</a> </strong> from <strong><a href="http://www.slideshare.net/CarlosAzaustre" target="_blank">Carlos Azaustre</a></strong></div>
+<p><span id="more-659"></span></p>
+<p>Y a continuación explico a modo de tutorial los pasos para implementar este sistema en un proyecto que tengamos</p>
+<p>Lo primero de todo, necesitamos tener <strong>Node.js</strong> y <strong>MongoDB</strong>
+ instalados en nuestro equipo. Node es el backend que utlizaremos y 
+MongoDB es una base de datos no relacional, basada en documentos JSON. 
+Podemos utlizar cualquier otra base de datos (por ejemplo, MySQL o 
+cualquier otra). Yo lo hago con Mongo porque me parece más sencillo y 
+porque esta basada en JavaScript del cual soy un talibán <img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/icon_razz.gif" alt=":P" class="wp-smiley"> </p>
+<ul>
+<li><a href="http://nodejs.org/download/">http://nodejs.org/download/</a></li>
+<li><a href="https://www.mongodb.org/downloads">https://www.mongodb.org/downloads</a></li>
+</ul>
+<p dir="ltr">A continuación creamos una estructura base de aplicación con el framework <em>Express</em>. De esta forma nos crea un “esqueleto” con archivos y carpetas de una especie de “hola mundo” con Express.</p>
+<pre><code class="ruby"><span class="variable">$ </span><span class="identifier">sudo</span> <span class="identifier">npm</span> <span class="identifier">install</span> -<span class="identifier">g</span> <span class="identifier">express</span>
+<span class="variable">$ </span><span class="identifier">express</span> <span class="identifier">passport</span>-<span class="identifier">example</span>
+<span class="variable">$ </span><span class="identifier">cd</span> <span class="identifier">passport</span>-<span class="identifier">example</span>
+<span class="variable">$ </span><span class="identifier">npm</span> <span class="identifier">install</span></code></pre>
+<p><span style="line-height: 1.5em;">Instalamos las dependencias que vamos a utilizar. <strong><em>Mongoose</em></strong> es el driver que nos ayuda a conectarnos a MongoDB e implementar esquemas de los modelos que salvemos en la base de datos. <em><strong>Passport</strong></em> es la librería que nos permite agilizar el proceso de autenticado y registro de usuarios con Node.js. <em><strong>Passport-twitter</strong></em> y <em><strong>Passport-facebook</strong></em>
+ son las librerías específicas para el login con Twitter y Facebook ya 
+que podemos utilizar Passport sin redes sociales implementando un método
+ local con Passport-Local.</span></p>
+<p>Con el prefijo<em> –save</em> logramos que las dependencias se queden grabadas en el <em>package.json</em></p>
+<pre><code class="ruby"><span class="variable">$ </span><span class="identifier">npm</span> <span class="identifier">install</span> --<span class="identifier">save</span> <span class="identifier">mongoose</span>
+<span class="variable">$ </span><span class="identifier">npm</span> <span class="identifier">install</span> --<span class="identifier">save</span> <span class="identifier">passport</span>
+<span class="variable">$ </span><span class="identifier">npm</span> <span class="identifier">install</span> --<span class="identifier">save</span> <span class="identifier">passport</span>-<span class="identifier">twitter</span>
+<span class="variable">$ </span><span class="identifier">npm</span> <span class="identifier">install</span> --<span class="identifier">save</span> <span class="identifier">passport</span>-<span class="identifier">facebook</span></code></pre>
+<p>Creamos un <strong>modelo usuario</strong> (<em>/models/user.js</em>) donde indicaremos que datos vamos a querer almacenar en la base de datos para nuestros usuarios. En este ejemplo <strong>vamos
+ a salvar el nombre, el proveedor, un ID, la foto del usuario y un campo
+ donde almacenaremos la fecha en la que el usuario se registró en 
+nuestra aplicació</strong>n.</p>
+<pre><code class="php"><span class="keyword">var</span> mongoose = <span class="keyword">require</span>(<span class="string">'mongoose'</span>);
+<span class="keyword">var</span> Schema = mongoose.Schema;
+
+<span class="keyword">var</span> UserSchema = <span class="keyword">new</span> Schema({
+    name: String,
+    provider: String,
+    provider_id: {type: String, unique: <span class="keyword">true</span>},
+    photo: String,
+    createdAt: {type: Date, <span class="keyword">default</span>: Date.now}
+});
+
+<span class="keyword">var</span> User = mongoose.model(<span class="string">'User'</span>, UserSchema);</code></pre>
+<p>Configuramos <strong>Passport</strong> (<em>/passport.js</em>) importando las librerías que utilizamos y las funciones que nos permiten el login.</p>
+<p>Con <strong><em>seriealizeUser</em></strong> y <em><strong>deserializeUser</strong></em> logramos que el objeto usuario quede almacenado en la sesión de la aplicación y asi poder utilizarlo a lo largo de ella.</p>
+<p>Con <em><strong>TwitterStrategy</strong></em> y <strong><em>FacebookStrategy</em></strong> utilizamos las estrategias de autenticación que nos proporciona Passport, les pasamos como parámetros los <strong>API Key y API secret</strong>
+ que nos dan las plataformas cuando registramos una aplicación en ellas,
+ y nos devuelven varios objetos, entre ellos el objeto “profile” que 
+contiene toda la información del usuario que devuelve Twitter o Facebook
+ y del que podemos sacar los atributos que queramos para nuestra 
+aplicación (nombre, ID, foto, etc..)</p>
+<pre><code class="javascript"><span class="keyword">var</span> mongoose = require(<span class="string">'mongoose'</span>);
+<span class="keyword">var</span> User = mongoose.model(<span class="string">'User'</span>);
+<span class="keyword">var</span> TwitterStrategy = require(<span class="string">'passport-twitter'</span>).Strategy;
+<span class="keyword">var</span> FacebookStrategy = require(<span class="string">'passport-facebook'</span>).Strategy;
+
+module.exports = <span class="function"><span class="keyword">function</span><span class="params">(passport)</span> {</span>
+
+     passport.serializeUser(<span class="function"><span class="keyword">function</span><span class="params">(user, done)</span> {</span>
+        done(<span class="literal">null</span>, user);
+    });
+
+     passport.deserializeUser(<span class="function"><span class="keyword">function</span><span class="params">(obj, done)</span> {</span>
+        done(<span class="literal">null</span>, obj);
+    });
+     passport.use(<span class="keyword">new</span> TwitterStrategy({
+        consumerKey: <span class="string">'TWITTER_CONSUMER_KEY'</span>,
+        consumerSecret: <span class="string">'TWITTER_CONSUMER_SECRET'</span>,
+        callbackURL: <span class="string">'/auth/twitter/callback'</span>
+    }, <span class="function"><span class="keyword">function</span><span class="params">(accessToken, refreshToken, profile, done)</span> {</span>
+        User.findOne({provider_id: profile.id}, <span class="function"><span class="keyword">function</span><span class="params">(err, user)</span> {</span>
+            <span class="keyword">if</span>(err) <span class="keyword">throw</span>(err);
+            <span class="keyword">if</span>(!err &amp;&amp; user!= <span class="literal">null</span>) <span class="keyword">return</span> done(<span class="literal">null</span>, user);
+
+            <span class="keyword">var</span> user = <span class="keyword">new</span> User({
+                provider_id: profile.id,
+                provider: profile.provider,
+                name: profile.displayName,
+                photo: profile.photos[<span class="number">0</span>].value
+            });
+            user.save(<span class="function"><span class="keyword">function</span><span class="params">(err)</span> {</span>
+                <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;
+                done(<span class="literal">null</span>, user);
+            });
+        });
+    }));
+     passport.use(<span class="keyword">new</span> FacebookStrategy({
+        clientID: <span class="string">'FACEBOOK_APP_CLIENT_ID'</span>,
+        clientSecret: <span class="string">'FACEBOOK_APP_SECRET_ID'</span>,
+        callbackURL: <span class="string">'/auth/twitter/callback'</span>
+    }, <span class="function"><span class="keyword">function</span><span class="params">(accessToken, refreshToken, profile, done)</span> {</span>
+        User.findOne({provider_id: profile.id}, <span class="function"><span class="keyword">function</span><span class="params">(err, user)</span> {</span>
+            <span class="keyword">if</span>(err) <span class="keyword">throw</span>(err);
+            <span class="keyword">if</span>(!err &amp;&amp; user!= <span class="literal">null</span>) <span class="keyword">return</span> done(<span class="literal">null</span>, user);
+
+            <span class="keyword">var</span> user = <span class="keyword">new</span> User({
+                provider_id: profile.id,
+                provider: profile.provider,
+                name: profile.displayName,
+                photo: profile.photos[<span class="number">0</span>].value
+            });
+            user.save(<span class="function"><span class="keyword">function</span><span class="params">(err)</span> {</span>
+                <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;
+                done(<span class="literal">null</span>, user);
+            });
+        });
+    }));</code></pre>
+<p>Una buena práctica es <strong>mantener las API Keys separadas del código fuente que subimos al repositorio</strong>, en un archivo <strong><em>config.js</em></strong> que luego importamos desde donde lo necesitemos.</p>
+<pre><code class="ruby"><span class="identifier">var</span> <span class="identifier">config</span> = {
+  <span class="identifier">twitter</span><span class="symbol">:</span> {
+    <span class="identifier">key</span><span class="symbol">:</span> ‘<span class="constant">TWITTER_API_KEY</span>’,
+    <span class="identifier">secret</span><span class="symbol">:</span> ‘<span class="constant">TWITTER_API_SECRET</span>’
+  },
+  <span class="identifier">facebook</span><span class="symbol">:</span> {
+    <span class="identifier"><span class="keymethods">id</span></span><span class="symbol">:</span> ‘<span class="constant">FACEBOOK_APP_ID</span>’,
+    <span class="identifier">secret</span><span class="symbol">:</span> ‘<span class="constant">FACEBOOK_APP_SECRET</span>’
+  }
+};
+
+<span class="class"><span class="keyword">module</span>.<span class="title">exports</span> = <span class="title">config</span>;</span></code></pre>
+<p>El archivo principal de la aplicación Express y por tanto del servidor quedaría mas o menos así (<em>app.js</em>)</p>
+<pre><code class="php"><span class="keyword">var</span> mongoose = <span class="keyword">require</span>(<span class="string">'mongoose'</span>);
+<span class="keyword">var</span> passport = <span class="keyword">require</span>(<span class="string">'passport'</span>);
+<span class="keyword">require</span>(<span class="string">'./models/user'</span>);
+<span class="keyword">require</span>(<span class="string">'./passport'</span>)(passport);
+
+mongoose.connect(<span class="string">'mongodb://localhost/passport-example'</span>, 
+  <span class="keyword">function</span>(err, res) {
+    <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;
+    console.log(<span class="string">'Conectado con éxito a la BD'</span>);
+});
+…
+app.<span class="keyword">use</span>(express.cookieParser());
+app.<span class="keyword">use</span>(express.urlencoded());
+app.<span class="keyword">use</span>(express.json());
+app.<span class="keyword">use</span>(express.methodOverride());
+app.<span class="keyword">use</span>(express.session({ secret: <span class="string">'secretkey'</span> }));
+
+<span class="comment">// Configuración de Express</span>
+app.<span class="keyword">use</span>(passport.initialize());
+app.<span class="keyword">use</span>(passport.session());
+...
+<span class="comment">// Rutas de Passport</span>
+app.get(<span class="string">'/logout'</span>, <span class="keyword">function</span>(req, res) {
+  req.logout();
+  res.redirect(<span class="string">'/'</span>);
+});
+app.get(<span class="string">'/auth/twitter'</span>, passport.authenticate(<span class="string">'twitter'</span>));
+app.get(<span class="string">'/auth/facebook'</span>, passport.authenticate(<span class="string">'facebook'</span>));
+app.get(<span class="string">'/auth/twitter/callback'</span>, passport.authenticate(<span class="string">'twitter'</span>,
+  { successRedirect: <span class="string">'/'</span>, 
+    failureRedirect: <span class="string">'/login'</span> }));
+app.get(<span class="string">'/auth/facebook/callback'</span>, passport.authenticate(<span class="string">'facebook'</span>,
+  { successRedirect: <span class="string">'/'</span>, 
+    failureRedirect: <span class="string">'/login'</span> }));
+...</code></pre>
+<pre><code class="javascript">exports.index = <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span>{</span>
+  res.render(<span class="string">'index'</span>, { 
+    title: <span class="string">'Passport-Example'</span>,
+    user: req.user
+  });
+};</code></pre>
+<p>Esta sería la plantilla Jade que renderiza el index: (<em>/views/index.jade</em>).
+ Como veis le aplicamos una lógica dentro de la plantilla. Si existe el 
+objeto usuario es que estamos logueados en la aplicación y por tanto le 
+pedimos que nos muestre la foto y el nombre y un enlace a salir. En caso
+ de que no exista el objeto usuario es que no estamos logueados, por 
+tanto indicamos que nos muestre los enlaces al registro/login con 
+Twitter y Facebook</p>
+<pre><code class="ruby"><span class="identifier"><span class="keyword">if</span></span>(<span class="identifier">user</span>)
+    <span class="identifier">ul</span>
+      <span class="identifier">li</span>
+        <span class="identifier">img</span>(<span class="identifier">src</span>=<span class="string">"<span class="subst">#{<span class="identifier">user</span>.<span class="identifier">photo</span>}</span>"</span>)
+      <span class="identifier">li</span> <span class="constant">Bienvenido</span> <span class="comment">#{user.name}</span>
+      <span class="identifier">li</span>
+        <span class="identifier">a</span>(<span class="identifier">href</span>=<span class="string">'logout'</span>) <span class="constant">Salir</span>
+<span class="identifier"><span class="keyword">else</span></span>
+    <span class="identifier">ul</span>
+      <span class="identifier">li</span>
+        <span class="identifier">a</span>(<span class="identifier">href</span>=<span class="string">'auth/twitter'</span>) <span class="constant">Login</span> <span class="identifier">con</span> <span class="constant">Twitter</span>
+      <span class="identifier">li</span>
+        <span class="identifier">a</span>(<span class="identifier">href</span>=<span class="string">'auth/facebook'</span>) <span class="constant">Login</span> <span class="identifier">con</span> <span class="constant">Facebook</span></code></pre>
+<p>Para crear una aplicación en Twitter podemos ir a<a href="http://dev.twitter.com/"> http://dev.twitter.com</a>
+ y registrar una nueva aplicación. Indicamos el nombre y en los campos 
+website y callback URL le ponemos “example.com” ya que no nos permite 
+poner Localhost. Con facebook es similar, la URL es <a href="http://developers.facebook.com/">http://developers.facebook.com</a> y en este caso si podemos indicarle que nuestra aplicación funciona en localhost.</p>
+<p>Aquí están las capturas para ambas plataformas:</p>
+<p><img alt="Screen Shot 2014-03-02 at 22.42.12.png" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/M454W31tHHliDU0X0BXGYo_woIhuwgIu8I-_Q4zpXKFK4an44_mPP9XDSsbF.png" width="423.70585196850396px;" height="318.6340262467192px;"></p>
+<p><img alt="Screen Shot 2014-03-02 at 22.44.15.png" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/OaWYSVZXLUuJHdCUMCu-jsQbcQSsLz2Umcek-CDS_60sUc0Vw6HF8xvPX_Kr.png" width="476.5903134083185px;" height="262.6405454620602px;"></p>
+<p><img alt="Screen Shot 2014-03-02 at 22.43.12.png" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/rKFFff1-g9yK-7bjUckIUhmr505Z3Sx9CmFgPmLMAQVB-PwH3VdDLh17tPFV.png" width="528.8478062747345px;" height="269.02622697484776px;"></p>
+<p><img alt="Screen Shot 2014-03-03 at 10.29.37.png" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/-KoZPMZO-TZ80kDqt9wMuSf67hlrAAhm-yR60lI_jsMpEdf5Yrwc-iGZnmfE.png" width="589.9843341496986px;" height="442.333207978977px;"></p>
+<p><img alt="Screen Shot 2014-03-02 at 22.46.37.png" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/2aDJIw2qrZ1HgezwyQ6IeUCB6cZx6a2aRg7LlbVqMXWup1mvTpDDy_XYNm3s.png" width="515.0968642347441px;" height="139.7665808970534px;"></p>
+<p><img alt="Screen Shot 2014-03-03 at 09.10.27.png" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/zp9w8kIyz4o5dJZCaH2yqKV0Xbj8Oy2nAW04OwWtV4AFg0lf4s7K9exz8boo.png" width="515.0979208958744px;" height="387.9608030544491px;"></p>
+<p>Y ya está, el flujo de la aplicación sería el siguiente: Primero nos pide autenticarnos con Twitter o Facebook</p>
+<p><img alt="Screen Shot 2014-03-03 at 10.45.01.png" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/jTiQ8zgXd-DSp0NQaSHjDsandVthXme8C-V5_Nw_iXcaF49JuEccL4hV14IP.png" width="291.47253249761627px;" height="281.8274341493141px;"></p>
+<p>Si elegimos Twitter nos redirige a la página de autenticación con 
+Twitter. En el caso de no estar logueados nos pediría el usuario y la 
+contraseña de Twitter</p>
+<p><img style="line-height: 1.5em;" alt="Screen Shot 2014-03-03 at 10.45.05.png" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/wk1qtmcoqd2BTjKGjaNnlewvxtwePpJAnA-sGcn2Yn4FduVTtWX-Cl6gSSa8.png" width="297.3078610878291px;" height="287.4723729811941px;"></p>
+<p>Y si todo sale correctamente, nos redirige a nuestra aplicación con 
+el usuario logueado, mostrándonos el nombre de usuario y la foto de 
+perfil</p>
+<p><img alt="Screen Shot 2014-03-03 at 10.45.09.png" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/0B9ZW3aQUmw3JREpGKCfB64FIwR3juGT5EiylNzeyvCNlmJjHlXpPB8KHG69.png" width="316.2308804569595px;" height="305.7716237065673px;"></p>
+<p>Tenéis <strong>todo el código utilizado disponible y comentado en español</strong> en <a href="http://github.com/carlosazaustre/passportjs-example">este <strong>respositorio de GitHub</strong></a>. Espero que os sirva en vuestros proyectos y desarrollos <img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/icon_smile.gif" alt=":)" class="wp-smiley"> </p>
+<div style="padding-bottom:20px; padding-top:10px;" class="hupso-share-buttons"><!-- Hupso Share Buttons - http://www.hupso.com/share/ --><a class="hupso_counters" href="http://www.hupso.com/share/"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/dot.png" style="border: 0px none; padding-top: 2px; float: left; margin: 0px; background-color: transparent; outline: medium none; box-shadow: none;" alt="Share Button"></a><script type="text/javascript">var hupso_services_c=new Array("twitter","facebook_like","google","linkedin");var hupso_twitter_via = "carlosazaustre";var hupso_counters_lang = "es_LA";var hupso_image_folder_url = "";var hupso_twitter_via="carlosazaustre";var hupso_url_c="";var hupso_title_c="Registro y autorización de usuarios en Node.js con Twitter y Facebook";</script><script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/counters.js"></script><div class="hupso_c" id="hupso_counters_1"><div style="display: inline-block;" id="counters_hupso_counters_1"><div style="float:left; margin-left:10px; width:90px;" class="hupso_twitter"><iframe style="width: 117px; height: 20px;" data-twttr-rendered="true" title="Twitter Tweet Button" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-horizontal" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/tweet_button_002.html" allowtransparency="true" id="twitter-widget-1" scrolling="no" frameborder="0"></iframe></div><div style="float:left; margin-left:10px; margin-right:15px;" class="hupso_facebook"><div fb-iframe-plugin-query="app_id=&amp;href=http%3A%2F%2Fcarlosazaustre.es%2Fblog%2Fregistro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook%2F&amp;layout=button_count&amp;locale=es_LA&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=180" fb-xfbml-state="rendered" class="fb-like fb_iframe_widget" data-href="http://carlosazaustre.es/blog/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/" data-send="false" data-layout="button_count" data-width="180" data-show-faces="false"><span style="vertical-align: bottom; width: 102px; height: 20px;"><iframe class="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/like_002.html" style="border: medium none; visibility: visible; width: 102px; height: 20px;" title="fb:like Facebook Social Plugin" allowtransparency="true" name="f27b438a448e854" scrolling="no" width="180px" frameborder="0" height="1000px"></iframe></span></div><div id="fb-root"></div></div><div style="float:left; margin-left:10px; width:80px;" class="hupso_google"><div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px;"><iframe title="+1" data-gapiattached="true" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/fastbutton_002.html" name="I1_1407969173216" id="I1_1407969173216" vspace="0" tabindex="0" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" marginwidth="0" marginheight="0" hspace="0" scrolling="no" width="100%" frameborder="0"></iframe></div></div><div style="float:left; margin-left:10px;" class="hupso_linkedin"></div><script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><script type="text/javascript">(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&status=0"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk')); </script><span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0px ! important; margin: 0px ! important; text-indent: 0px ! important; display: inline-block ! important; vertical-align: baseline ! important; font-size: 1px ! important;"><span id="li_ui_li_gen_1407969171743_2"><a id="li_ui_li_gen_1407969171743_2-link" href="javascript:void(0);"><span id="li_ui_li_gen_1407969171743_2-logo">in</span><span id="li_ui_li_gen_1407969171743_2-title"><span id="li_ui_li_gen_1407969171743_2-mark"></span><span id="li_ui_li_gen_1407969171743_2-title-text">Share</span></span></a></span></span><span style="padding: 0px ! important; margin: 0px ! important; text-indent: 0px ! important; display: inline-block ! important; vertical-align: baseline ! important; font-size: 1px ! important;"><span id="li_ui_li_gen_1407969171766_3-container" class="IN-right"><span id="li_ui_li_gen_1407969171766_3" class="IN-right"><span id="li_ui_li_gen_1407969171766_3-inner" class="IN-right"><span id="li_ui_li_gen_1407969171766_3-content" class="IN-right">10</span></span></span></span></span></span><script data-counter="right" data-url="http://carlosazaustre.es/blog/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/" type="IN/Share+init">window.___gcfg = {lang: 'es'}; (function() {var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();</script><script src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/in.js" type="text/javascript"></script></div></div><!-- Hupso Share Buttons --></div><div id="ts-fab-below" class="ts-fab-wrapper"><span class="screen-reader-text">The following two tabs change content below.</span><ul class="ts-fab-list"><li class="ts-fab-bio-link active"><a href="#ts-fab-bio-below">Bio</a></li><li class="ts-fab-latest-posts-link"><a href="#ts-fab-latest-posts-below">Latest Posts</a></li></ul><div class="ts-fab-tabs">
+	<div style="display: block;" class="ts-fab-tab" id="ts-fab-bio-below">
+		<div class="ts-fab-avatar"><img alt="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/573cbe6e46797b20b6ef954966b4f929_002.jpeg" class="avatar avatar-80 photo" width="80" height="80"><div class="ts-fab-social-links"><a href="http://twitter.com/carlosazaustre" title="Twitter" rel="nofollow"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/twitter.png" alt="My Twitter profile" width="24" height="24"></a><a href="http://facebook.com/carlos.azaustre" title="Facebook" rel="nofollow"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/facebook.png" alt="My Facebook profile" width="24" height="24"></a><a href="http://plus.google.com/110321468139656319367?rel=author" title="Google+"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/googleplus.png" alt="My Google+ profile" width="24" height="24"></a><a href="http://www.linkedin.com/in/carlosazaustre" title="LinkedIn" rel="nofollow"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/linkedin.png" alt="My LinkedIn profile" width="24" height="24"></a><a href="http://instagram.com/carlosazaustre" title="Instagram" rel="nofollow"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/instagram.png" alt="My Instagram profile" width="24" height="24"></a><a href="http://pinterest.com/carlosazaustre" title="Pinterest" rel="nofollow"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/pinterest.png" alt="My Pinterest profile" width="24" height="24"></a></div>
+		</div>
+		
+		<div class="ts-fab-text">
+			<div class="ts-fab-header"><h4><a href="http://carlosazaustre.es/" rel="nofollow">cazaustre</a></h4><div class="ts-fab-description"><span>Front End Developer</span> at <a href="http://chefly.co/" rel="nofollow"><span>Chefly</span></a></div></div><!-- /.ts-fab-header -->
+			<div class="ts-fab-content">Desarrollador Front-End y Diseñador 
+Gráfico Freelance. Apasionado de la tecnología HTML5 y el mundo 
+JavaScript. Geek, adicto a las series y a las camisetas.</div>
+		</div>
+	</div>
+	<div style="display: none;" class="ts-fab-tab" id="ts-fab-latest-posts-below">
+		<div class="ts-fab-avatar"><img alt="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/573cbe6e46797b20b6ef954966b4f929_002.jpeg" class="avatar avatar-80 photo" width="80" height="80"><div class="ts-fab-social-links"><a href="http://twitter.com/carlosazaustre" title="Twitter" rel="nofollow"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/twitter.png" alt="My Twitter profile" width="24" height="24"></a><a href="http://facebook.com/carlos.azaustre" title="Facebook" rel="nofollow"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/facebook.png" alt="My Facebook profile" width="24" height="24"></a><a href="http://plus.google.com/110321468139656319367?rel=author" title="Google+" rel="nofollow"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/googleplus.png" alt="My Google+ profile" width="24" height="24"></a><a href="http://www.linkedin.com/in/carlosazaustre" title="LinkedIn" rel="nofollow"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/linkedin.png" alt="My LinkedIn profile" width="24" height="24"></a><a href="http://instagram.com/carlosazaustre" title="Instagram" rel="nofollow"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/instagram.png" alt="My Instagram profile" width="24" height="24"></a><a href="http://pinterest.com/carlosazaustre" title="Pinterest" rel="nofollow"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/pinterest.png" alt="My Pinterest profile" width="24" height="24"></a></div>
+		</div>
+		<div class="ts-fab-text">
+			<div class="ts-fab-header">
+				<h4>Latest posts by cazaustre <span class="latest-see-all">(<a href="http://carlosazaustre.es/blog/author/cazaustre/" rel="nofollow">see all</a>)</span></h4>
+			</div>
+			<ul class="ts-fab-latest">
+				<li>
+					<a href="http://carlosazaustre.es/blog/como-configurar-tu-servidor-cloud-en-digitalocean/">Cómo configurar tu servidor cloud en DigitalOcean</a><span> - julio 31, 2014</span> 
+				</li>
+				<li>
+					<a href="http://carlosazaustre.es/blog/como-implementar-una-api-rest-con-mongodb-node-js-usando-express-v4/">Cómo implementar una API REST con MongoDB + Node.js usando Express v4</a><span> - julio 28, 2014</span> 
+				</li>
+				<li>
+					<a href="http://carlosazaustre.es/blog/automatizando-tu-flujo-de-trabajo-en-el-frontend-con-gulpjs/">Automatizando tu flujo de trabajo en el Frontend con GulpJS</a><span> - julio 26, 2014</span> 
+				</li>
+		</ul></div>
+	</div>
+		</div>
+	</div>					</div><!-- .entry-content -->
+
+	</div><!-- .entry-container -->
+		<footer class="entry-meta clearfix">
+		<div class="up_arrow"></div>
+<div class="pull-left author-meta">
+	<img alt="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/573cbe6e46797b20b6ef954966b4f929.jpeg" class="avatar avatar-55 photo" width="55" height="55">	<h4 title="" data-original-title="" class="bl_popover" data-placement="top" data-trigger="hover" data-title="cazaustre" data-content="Desarrollador Front-End y Diseñador Gráfico Freelance. Apasionado de la tecnología HTML5 y el mundo JavaScript. Geek, adicto a las series y a las camisetas.">
+		<a href="http://carlosazaustre.es/blog/author/cazaustre/">cazaustre</a>
+	</h4>
+</div>
+<div class="pull-right share-story-container">
+	<small class="muted pull-left">Share story</small>
+	<ul class="share-story">
+		<li><a title="" data-original-title="" class="tips" data-title="Facebook" href="javascript:void(0);" onclick="social_share('http://www.facebook.com/sharer.php?u=http%3A%2F%2Fcarlosazaustre.es%2Fblog%2Fregistro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook%2F&amp;t=Registro+y+autorizaci%C3%B3n+de+usuarios+en+Node.js+con+Twitter+y+Facebook');"><i class="icon-facebook-1"></i></a></li>		<li><a title="" data-original-title="" class="tips" data-title="Google+" href="javascript:void(0);" onclick="social_share('https://plus.google.com/share?url=http%3A%2F%2Fcarlosazaustre.es%2Fblog%2Fregistro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook%2F');"><i class="icon-gplus-1"></i></a></li>		<li><a title="" data-original-title="" class="tips" data-title="Twitter" href="javascript:void(0);" onclick="social_share('http://twitter.com/intent/tweet?url=http%3A%2F%2Fcarlosazaustre.es%2Fblog%2Fregistro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook%2F');"><i class="icon-twitter-1"></i></a></li>		<li><a title="" data-original-title="" class="tips" data-title="Reddit" href="javascript:void(0);" onclick="social_share('http://www.reddit.com/submit?url=http%3A%2F%2Fcarlosazaustre.es%2Fblog%2Fregistro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook%2F&amp;title=Registro+y+autorizaci%C3%B3n+de+usuarios+en+Node.js+con+Twitter+y+Facebook');"><i class="icon-reddit"></i></a></li>		<li><a title="" data-original-title="" class="tips" data-title="Linkedin" href="javascript:void(0);" onclick="social_share('http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fcarlosazaustre.es%2Fblog%2Fregistro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook%2F&amp;title=Registro+y+autorizaci%C3%B3n+de+usuarios+en+Node.js+con+Twitter+y+Facebook');"><i class="icon-linkedin-1"></i></a></li>		<li><a title="" data-original-title="" class="tips" data-title="Delicious" href="javascript:void(0);" onclick="social_share('http://www.delicious.com/post?v=2&amp;url=http%3A%2F%2Fcarlosazaustre.es%2Fblog%2Fregistro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook%2F&amp;notes=&amp;tags=&amp;title=Registro+y+autorizaci%C3%B3n+de+usuarios+en+Node.js+con+Twitter+y+Facebook');"><i class="icon-delicious"></i></a></li>		<li><a title="" data-original-title="" class="tips" data-title="Email" href="javascript:void(0);" onclick="social_share('mailto:?subject=Registro+y+autorizaci%C3%B3n+de+usuarios+en+Node.js+con+Twitter+y+Facebook&amp;body=http%3A%2F%2Fcarlosazaustre.es%2Fblog%2Fregistro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook%2F');"><i class="icon-mail-1"></i></a></li>	</ul>
+</div>
+	</footer><!-- .entry-meta -->
+	</article><!-- #post-659 -->
+
+
+
+
+										<div class="single-pagination box clearfix">							<span class="nav-previous" style="float:left;">
+								<a href="http://carlosazaustre.es/blog/cursos-online-interesantes-para-2014/" rel="prev"><span><i class="icon-left-open"></i>Older</span><br><div class="post-title hidden-tablet hidden-phone">Cursos Online interesantes para 2014</div></a>							</span>							<span class="nav-next" style="float:right;">
+								<a href="http://carlosazaustre.es/blog/como-instalar-un-servidor-https-en-nginx-desde-cero/" rel="next"><span>Newer<i class="icon-right-open"></i></span><br><div class="post-title hidden-tablet hidden-phone">Cómo instalar un Servidor HTTPS en Nginx desde cero</div></a>							</span>					</div>
+					
+					<div id="related-posts" class="row-fluid"><div class="span3 box related-standard"><div class="related-header"><a class="related-image" href="http://carlosazaustre.es/blog/como-configurar-tu-servidor-cloud-en-digitalocean/" rel="bookmark"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/Screen-Shot-2014-07-28-at-00_002.png" class="attachment-small" alt="Screen Shot 2014-07-28 at 00.08.04" width="194" height="150"></a></div><div class="related-content"><h4><a href="http://carlosazaustre.es/blog/como-configurar-tu-servidor-cloud-en-digitalocean/" rel="bookmark" title="Cómo configurar tu servidor cloud en DigitalOcean">Cómo configurar tu servidor cloud en DigitalOcean</a></h4>	    </div>
+	    <div class="related-footer">
+		    <i class="icon-clock"></i>&nbsp;jul 31, 2014	    </div>
+	</div>
+    <div class="span3 box related-standard"><div class="related-header"><a class="related-image" href="http://carlosazaustre.es/blog/como-implementar-una-api-rest-con-mongodb-node-js-usando-express-v4/" rel="bookmark"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/nodejs-mongodb.png" class="attachment-small" alt="nodejs-mongodb-api" width="194" height="36"></a></div><div class="related-content"><h4><a href="http://carlosazaustre.es/blog/como-implementar-una-api-rest-con-mongodb-node-js-usando-express-v4/" rel="bookmark" title="Cómo implementar una API REST con MongoDB + Node.js usando Express v4">Cómo implementar una API REST con MongoDB + Node.js usando Express v4</a></h4>	    </div>
+	    <div class="related-footer">
+		    <i class="icon-clock"></i>&nbsp;jul 28, 2014	    </div>
+	</div>
+    <div class="span3 box related-standard"><div class="related-header"><a class="related-image" href="http://carlosazaustre.es/blog/automatizando-tu-flujo-de-trabajo-en-el-frontend-con-gulpjs/" rel="bookmark"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/gulp-2x-194x150.png" class="attachment-small" alt="gulp-js" width="194" height="150"></a></div><div class="related-content"><h4><a href="http://carlosazaustre.es/blog/automatizando-tu-flujo-de-trabajo-en-el-frontend-con-gulpjs/" rel="bookmark" title="Automatizando tu flujo de trabajo en el Frontend con GulpJS">Automatizando tu flujo de trabajo en el Frontend con GulpJS</a></h4>	    </div>
+	    <div class="related-footer">
+		    <i class="icon-clock"></i>&nbsp;jul 26, 2014	    </div>
+	</div>
+    <div class="span3 box related-video"><div class="related-header"><iframe style="width: 143px; height: 80.4375px;" data-aspectratio="0.5625" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/EnBTQTjX4wE.html" allowfullscreen="" frameborder="0"></iframe></div><div class="related-content"><h4><a href="http://carlosazaustre.es/blog/primera-aplicacion-web-en-raspberrypi-con-nodejs-cylonjs-controlando-leds-desde-el-movil/" rel="bookmark" title="Primera aplicación web en RaspberryPi con NodeJS + CylonJS. Controlando LEDs desde el móvil">Primera aplicación web en RaspberryPi con NodeJS + CylonJS. Controlando LEDs desde el móvil</a></h4>	    </div>
+	    <div class="related-footer">
+		    <i class="icon-clock"></i>&nbsp;jul 16, 2014	    </div>
+	</div>
+    </div>
+<div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/a.html" style="width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 2064px ! important;" title="Disqus" tabindex="0" allowtransparency="true" data-disqus-uid="2" id="dsq-2" scrolling="no" width="100%" frameborder="0"></iframe></div>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var disqus_url = 'http://carlosazaustre.es/blog/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/';
+    var disqus_identifier = '659 http://carlosazaustre.es/blog/?p=659';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = 'carlosazaustre';
+    var disqus_title = "Registro y autorización de usuarios en Node.js con Twitter y Facebook";
+    var disqus_config = function () {
+        var config = this; // Access to the config object
+        config.language = '';
+
+        /* Add the ability to add javascript callbacks */
+        
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '?cf_action=sync_comments&post_id=659';
+
+            var firstScript = document.getElementsByTagName( "script" )[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        });
+                    };
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var DsqLocal = {
+        'trackbacks': [
+        ],
+        'trackback_url': "http:\/\/carlosazaustre.es\/blog\/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook\/trackback\/"    };
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.' + 'disqus.com' + '/' + 'embed' + '.js' + '?pname=wordpress&pver=2.77';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>
+
+		</div><!-- #content .site-content -->
+
+				<aside id="side-bar" class="span3">
+				<div id="bl_author-2" class="box bl_author"><h3 class="widget-head">¿Quién escribe esto?</h3><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/Screen-Shot-2014-01-29-at-19.png"><div class="widget-body"><div class="bl_author_img"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/avatarplus.jpg"></div><div class="bl_author_bio"><h3>Carlos Azaustre</h3><p class="muted"><iframe src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/github-btn.html" allowtransparency="true" scrolling="0" width="152" frameborder="0" height="20"></iframe><br>
+Hola! soy <a href="http://carlosazaustre.es/blog/sobre-mi">Carlos Azaustre</a>. Ingeniero en Telemática por la <a href="http://www.uc3m.es/portal/page/portal/degree_programmes/telematics/study_program">UC3M</a>. <a href="http://carlosazaustre.es/blog/curriculum" title="Desarrollador Web">Trabajo como Desarrollador Front-End y Back-End</a> en <a href="https://chefly.co/">Chefly</a>.
+<br><br>
+Hi, my name is <a href="https://plus.google.com/110321468139656319367?rel=author">Carlos Azaustre</a>. I've got the BSc Telematics Engineering issued by <a href="http://www.uc3m.es/portal/page/portal/degree_programmes/telematics/study_program">UC3M (Spain)</a>. <a href="http://carlosazaustre.es/blog/curriculum" title="Desarrollador Web">I'm working</a> as CTO at <a href="https://chefly.co/">Chefly</a></p></div></div></div><div id="bl_socialbox-2" class="box bl_socialbox">  		<h3 class="widget-head">Sígueme en</h3>    	<div class="widget-body">
+    		<ul class="clearfix">
+	    	<li><a title="" data-original-title="" target="_blank" data-title="Facebook" class="tips bl_icon_facebook" href="http://facebook.com/carlosazaustre.web"><i class="icon-facebook-1"></i></a></li>	    	<li><a title="" data-original-title="" target="_blank" data-title="Twitter" class="tips bl_icon_twitter" href="http://twitter.com/carlosazaustre"><i class="icon-twitter-1"></i></a></li>	    	<li><a title="" data-original-title="" target="_blank" data-title="Google+" class="tips bl_icon_googleplus" href="https://plus.google.com/110321468139656319367?rel=author"><i class="icon-gplus-1"></i></a></li>	    	<li><a title="" data-original-title="" target="_blank" data-title="Linkedin" class="tips bl_icon_linkedin" href="http://linkedin.com/in/carlosazaustre"><i class="icon-linkedin-1"></i></a></li>	    		    	<li><a title="" data-original-title="" target="_blank" data-title="Rss" class="tips bl_icon_rss" href="http://carlosazaustre.es/blog/feed/"><i class="icon-rss-1"></i></a></li>	    		    		    		    	<li><a title="" data-original-title="" target="_blank" data-title="Dribbble" class="tips bl_icon_dribbble" href="http://dribbble.com/carlosazaustre"><i class="icon-dribbble-1"></i></a></li>	    		    		    	    		</ul>
+    	</div>
+    </div><div id="bl_newsletter-2" class="box bl_newsletter">	<h3 class="widget-head">Subscríbete a mi blog</h3>	<div class="widget-body">
+	<p>Recibe en tu email antes que nadie todo lo que se cuece en este blog :)</p>	<div class="input-append">
+	    <input class="bl_newsletter_email" placeholder="Email address" type="text">
+	    <button class="btn btn-primary" type="button">Subscribe!</button>
+	</div>
+	</div>
+    </div><div id="text-5" class="box widget_text"><h3 class="widget-head">Camisetas Geek</h3>			<div class="textwidget"><p>Puedes visitar mi tienda en Redbubble, donde tengo diseños "geek" para camisetas. Puedes comprarlas en <a href="http://www.redbubble.com/people/carlos-azaustre/shop" title="Camisetas frikis geek sobre programadores">RedBubble</a>
+</p>---<p>
+Sometimes I create t-shirt designs to sell. You can buy it on <a href="http://www.redbubble.com/people/carlos-azaustre/shop" title="Geek T-Shirts about technology">RedBubble</a>
+</p>
+<a title="camisetas frikis para programadores" href="http://www.redbubble.com/people/carlos-azaustre/shop"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/HJeRWu.jpeg" width="270"></a></div>
+		</div><div id="pages-3" class="box widget_pages"><h3 class="widget-head">Páginas</h3>		<ul>
+			<li class="page_item page-item-747"><a href="http://carlosazaustre.es/blog/ebook-angular/">Desarrollo Web Ágil con Angular.js</a></li>
+<li class="page_item page-item-128"><a href="http://carlosazaustre.es/blog/sobre-mi/">Sobre mi</a></li>
+<li class="page_item page-item-125"><a href="http://carlosazaustre.es/blog/contacto/">Contacto</a></li>
+<li class="page_item page-item-363"><a href="http://carlosazaustre.es/blog/curriculum/">CV</a></li>
+		</ul>
+		</div><div id="bl_tweets-2" class="box bl_tweets">      <h3 class="widget-head"><i class="icon-twitter-1"></i> @carlosazaustre</h3>      <div class="widget-body" id="tweets">
+        <iframe title="Cronología de Twitter" style="border: medium none; max-width: 100%; min-width: 180px; width: 300px;" class="twitter-timeline twitter-timeline-rendered" allowtransparency="true" id="twitter-widget-2" scrolling="no" frameborder="0" height="450"></iframe>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>      </div>
+    </div><div id="bl_likebox-2" class="box bl_likebox">      <h3 class="widget-head"><i class="icon-facebook-1"></i> Sígueme en</h3>      <div class="widget-body" id="bl_likebox">
+        <iframe src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/likebox.html" style="border:none; overflow:hidden; width:100%; height:590px;" allowtransparency="true" scrolling="no" frameborder="0"></iframe>
+      </div>
+    </div><div id="bl_html-2" class="box box bl_html"><h3 class="widget-head">Libros publicados</h3>			<div class="widget-body"><p>Desarrolla aplicaciones web con Angular.js y automatiza tu Frontend con Gulp
+</p>
+<p><a href="https://sellfy.com/p/VOqw/"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/bS2aSq.jpeg"></a></p>
+<strong>Desarrollo Web Ágil con Angular.js</strong><br>
+Autor: Carlos Azaustre<br>
+<a style="width: 162px; height: 32px; position: relative; overflow: hidden; display: inline-block;" href="https://sellfy.com/p/VOqw/" id="VOqw" class="sellfy-buy-button slfy_activated slfy_load_started"><iframe name="sellfy_button_iframe" id="sellfy_button_iframe" style="width:170px; max-width:170px!important; height:32px; max-height: 32px !important;  overflow:hidden; margin: 0" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/a_002.html" allowtransparency="true" scrolling="no" frameborder="0"></iframe><div style="width: 162px; height: 32px; position: absolute; left: 0px; top: 0px; opacity: 0;"></div></a><script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/api_buttons.js"></script>
+<br><br>
+<p>
+Aprende desde cero el Framework CSS Foundation
+</p>
+<p>
+<a href="http://www.packtpub.com/zurb-foundation-4-framewok/book"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/foundation.png"></a></p>
+<p>
+<a href="http://www.packtpub.com/zurb-foundation-4-framewok/book">Instant: Zurb Foundation 4</a><br>
+Autores: Jorge Arévalo, Carlos Azaustre<br>
+ISBN 9781782164029<br>
+<a href="http://www.packtpub.com/zurb-foundation-4-framewok/book"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/y37.jpeg"></a></p></div>
+		</div><div id="tag_cloud-2" class="box widget_tag_cloud"><h3 class="widget-head">Aquí se habla de</h3><div class="tagcloud"><a href="http://carlosazaustre.es/blog/tag/amazon-web-services/" class="tag-link-49" title="4 temas" style="font-size: 13.283018867925pt;">Amazon Web Services</a>
+<a href="http://carlosazaustre.es/blog/tag/angularjs/" class="tag-link-68" title="4 temas" style="font-size: 13.283018867925pt;">angularjs</a>
+<a href="http://carlosazaustre.es/blog/tag/api/" class="tag-link-8" title="3 temas" style="font-size: 11.962264150943pt;">API</a>
+<a href="http://carlosazaustre.es/blog/tag/autonomo/" class="tag-link-34" title="2 temas" style="font-size: 10.377358490566pt;">autónomo</a>
+<a href="http://carlosazaustre.es/blog/tag/aws/" class="tag-link-30" title="3 temas" style="font-size: 11.962264150943pt;">AWS</a>
+<a href="http://carlosazaustre.es/blog/tag/back-end/" class="tag-link-61" title="2 temas" style="font-size: 10.377358490566pt;">back-end</a>
+<a href="http://carlosazaustre.es/blog/tag/backend/" class="tag-link-106" title="2 temas" style="font-size: 10.377358490566pt;">backend</a>
+<a href="http://carlosazaustre.es/blog/tag/bower/" class="tag-link-55" title="2 temas" style="font-size: 10.377358490566pt;">Bower</a>
+<a href="http://carlosazaustre.es/blog/tag/desarrollo/" class="tag-link-33" title="2 temas" style="font-size: 10.377358490566pt;">desarrollo</a>
+<a href="http://carlosazaustre.es/blog/tag/emprendimiento/" class="tag-link-18" title="1 tema" style="font-size: 8pt;">emprendimiento</a>
+<a href="http://carlosazaustre.es/blog/tag/express/" class="tag-link-60" title="4 temas" style="font-size: 13.283018867925pt;">Express</a>
+<a href="http://carlosazaustre.es/blog/tag/frameworks/" class="tag-link-59" title="2 temas" style="font-size: 10.377358490566pt;">Frameworks</a>
+<a href="http://carlosazaustre.es/blog/tag/freelance/" class="tag-link-16" title="4 temas" style="font-size: 13.283018867925pt;">freelance</a>
+<a href="http://carlosazaustre.es/blog/tag/front-end/" class="tag-link-56" title="3 temas" style="font-size: 11.962264150943pt;">Front-End</a>
+<a href="http://carlosazaustre.es/blog/tag/frontend/" class="tag-link-87" title="3 temas" style="font-size: 11.962264150943pt;">frontend</a>
+<a href="http://carlosazaustre.es/blog/tag/git/" class="tag-link-9" title="1 tema" style="font-size: 8pt;">Git</a>
+<a href="http://carlosazaustre.es/blog/tag/grunt/" class="tag-link-53" title="4 temas" style="font-size: 13.283018867925pt;">Grunt</a>
+<a href="http://carlosazaustre.es/blog/tag/herramientas/" class="tag-link-26" title="1 tema" style="font-size: 8pt;">herramientas</a>
+<a href="http://carlosazaustre.es/blog/tag/html5/" class="tag-link-31" title="2 temas" style="font-size: 10.377358490566pt;">HTML5</a>
+<a href="http://carlosazaustre.es/blog/tag/impuestos/" class="tag-link-21" title="3 temas" style="font-size: 11.962264150943pt;">impuestos</a>
+<a href="http://carlosazaustre.es/blog/tag/ios/" class="tag-link-23" title="1 tema" style="font-size: 8pt;">ios</a>
+<a href="http://carlosazaustre.es/blog/tag/ios7/" class="tag-link-24" title="1 tema" style="font-size: 8pt;">ios7</a>
+<a href="http://carlosazaustre.es/blog/tag/irlanda/" class="tag-link-20" title="2 temas" style="font-size: 10.377358490566pt;">Irlanda</a>
+<a href="http://carlosazaustre.es/blog/tag/javascript/" class="tag-link-7" title="22 temas" style="font-size: 22pt;">JavaScript</a>
+<a href="http://carlosazaustre.es/blog/tag/jshint/" class="tag-link-47" title="2 temas" style="font-size: 10.377358490566pt;">JSHint</a>
+<a href="http://carlosazaustre.es/blog/tag/json/" class="tag-link-28" title="3 temas" style="font-size: 11.962264150943pt;">JSON</a>
+<a href="http://carlosazaustre.es/blog/tag/linkedin/" class="tag-link-15" title="1 tema" style="font-size: 8pt;">linkedin</a>
+<a href="http://carlosazaustre.es/blog/tag/mean/" class="tag-link-83" title="4 temas" style="font-size: 13.283018867925pt;">MEAN</a>
+<a href="http://carlosazaustre.es/blog/tag/mobile/" class="tag-link-32" title="1 tema" style="font-size: 8pt;">Mobile</a>
+<a href="http://carlosazaustre.es/blog/tag/mongo/" class="tag-link-27" title="2 temas" style="font-size: 10.377358490566pt;">Mongo</a>
+<a href="http://carlosazaustre.es/blog/tag/mongodb/" class="tag-link-10" title="8 temas" style="font-size: 16.584905660377pt;">MongoDB</a>
+<a href="http://carlosazaustre.es/blog/tag/mongoose/" class="tag-link-11" title="5 temas" style="font-size: 14.339622641509pt;">Mongoose</a>
+<a href="http://carlosazaustre.es/blog/tag/mooc/" class="tag-link-17" title="4 temas" style="font-size: 13.283018867925pt;">mooc</a>
+<a href="http://carlosazaustre.es/blog/tag/mvc/" class="tag-link-58" title="2 temas" style="font-size: 10.377358490566pt;">MVC</a>
+<a href="http://carlosazaustre.es/blog/tag/nginx/" class="tag-link-97" title="3 temas" style="font-size: 11.962264150943pt;">Nginx</a>
+<a href="http://carlosazaustre.es/blog/tag/node/" class="tag-link-6" title="13 temas" style="font-size: 19.22641509434pt;">Node</a>
+<a href="http://carlosazaustre.es/blog/tag/nodebots-2/" class="tag-link-120" title="2 temas" style="font-size: 10.377358490566pt;">nodebots</a>
+<a href="http://carlosazaustre.es/blog/tag/osx/" class="tag-link-25" title="1 tema" style="font-size: 8pt;">osx</a>
+<a href="http://carlosazaustre.es/blog/tag/produccion/" class="tag-link-98" title="2 temas" style="font-size: 10.377358490566pt;">Producción</a>
+<a href="http://carlosazaustre.es/blog/tag/proyectos/" class="tag-link-19" title="2 temas" style="font-size: 10.377358490566pt;">proyectos</a>
+<a href="http://carlosazaustre.es/blog/tag/raspberrypi/" class="tag-link-118" title="2 temas" style="font-size: 10.377358490566pt;">raspberrypi</a>
+<a href="http://carlosazaustre.es/blog/tag/rest/" class="tag-link-13" title="1 tema" style="font-size: 8pt;">REST</a>
+<a href="http://carlosazaustre.es/blog/tag/tecnologias-web/" class="tag-link-29" title="7 temas" style="font-size: 15.924528301887pt;">Tecnologías Web</a>
+<a href="http://carlosazaustre.es/blog/tag/tutorial/" class="tag-link-43" title="2 temas" style="font-size: 10.377358490566pt;">tutorial</a>
+<a href="http://carlosazaustre.es/blog/tag/workflow/" class="tag-link-88" title="2 temas" style="font-size: 10.377358490566pt;">workflow</a></div>
+</div><div id="text-9" class="box widget_text"><h3 class="widget-head">Los que más comentan</h3>			<div class="textwidget"><script src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/top_commenters_widget.js"></script> <style type="text/css" media="screen">	 .dsq-widget ul.dsq-widget-list {	 padding: 0;	 margin: 0;	 text-align: left;	 }	 img.dsq-widget-avatar {	 width: 32px;	 height: 32px;	 border: 0px;	 margin: 0px;	 padding: 0px 3px 3px 0px;	 float: left;	 }	 a.dsq-widget-user {	 font-weight: bold;	 }	 a.dsq-widget-thread {	 font-weight: bold;	 }	 p.dsq-widget-meta {	 clear: both;	 font-size: 80%;	 padding: 0;	 margin: 0;	 }	 li.dsq-widget-item {	 margin: 15px 0;	 list-style-type: none;	 clear: both;	 }	 span.dsq-widget-clout {	 padding: 0 2px;	 background-color: #ff7300;	 color: #fff;	 }	 table.dsq-widget-horiz td {	 padding-right: 15px;	 }	 .dsq-widget-comment p {	 display: inline;	 }	 </style>	 <ul class="dsq-widget-list">	 <li class="dsq-widget-item">	 <a href="http://disqus.com/cristhianduran/">	 <img class="dsq-widget-avatar" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/avatar92_002.jpg">	 </a>	 <a class="dsq-widget-user" href="http://disqus.com/cristhianduran/" onclick="return false">Cristhian Duran</a>	 <p class="dsq-widget-meta" style="clear:none; font-size: 90%;"><span class="dsq-widget-clout"></span>&nbsp;·&nbsp;6 posts</p>	 <div style="clear:left"></div>	 </li>	 <li class="dsq-widget-item">	 <a href="http://disqus.com/yersoncrespo/">	 <img class="dsq-widget-avatar" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/avatar92.jpg">	 </a>	 <a class="dsq-widget-user" href="http://disqus.com/yersoncrespo/" onclick="return false">Yerson Crespo</a>	 <p class="dsq-widget-meta" style="clear:none; font-size: 90%;"><span class="dsq-widget-clout"></span>&nbsp;·&nbsp;5 posts</p>	 <div style="clear:left"></div>	 </li>	 <li class="dsq-widget-item">	 <a href="http://disqus.com/bienvenidosaez/">	 <img class="dsq-widget-avatar" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/avatar92_003.jpg">	 </a>	 <a class="dsq-widget-user" href="http://disqus.com/bienvenidosaez/" onclick="return false">Bienvenido Sáez Muelas</a>	 <p class="dsq-widget-meta" style="clear:none; font-size: 90%;"><span class="dsq-widget-clout"></span>&nbsp;·&nbsp;4 posts</p>	 <div style="clear:left"></div>	 </li>	 <li class="dsq-widget-item">	 <a href="http://disqus.com/jersonbetinpantoja/">	 <img class="dsq-widget-avatar" src="a_data/noavatar92.png">	 </a>	 <a class="dsq-widget-user" href="http://disqus.com/jersonbetinpantoja/" onclick="return false">Jerson Betin Pantoja</a>	 <p class="dsq-widget-meta" style="clear:none; font-size: 90%;"><span class="dsq-widget-clout"></span>&nbsp;·&nbsp;4 posts</p>	 <div style="clear:left"></div>	 </li>	 <li class="dsq-widget-item">	 <a href="http://disqus.com/jesusjavega/">	 <img class="dsq-widget-avatar" src="a_data/noavatar92.png">	 </a>	 <a class="dsq-widget-user" href="http://disqus.com/jesusjavega/" onclick="return false">Jesus Javega</a>	 <p class="dsq-widget-meta" style="clear:none; font-size: 90%;"><span class="dsq-widget-clout"></span>&nbsp;·&nbsp;4 posts</p>	 <div style="clear:left"></div>	 </li>	 </ul></div>
+		</div><div id="bl_tabs-2" class="box bl_tabs">    <h3 class="widget-head">Actividad Reciente</h3>
+    		    <ul class="nav nav-tabs" id="bl_side_tabs">
+		    <li class="active"><a href="#bl_side_posts">Posts</a></li>		    <li><a href="#bl_side_comments">Comments</a></li>		    	    </ul>
+	    	     
+	    <div class="tab-content">
+		    		    	<div class="tab-pane active" id="bl_side_posts">
+					<ul>
+					    					        <li style="right: 0px;">
+					        	<a class="tab_attachment" href="http://carlosazaustre.es/blog/como-configurar-tu-servidor-cloud-en-digitalocean/"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/Screen-Shot-2014-07-28-at-00.png" alt="Cómo configurar tu servidor cloud en DigitalOcean"></a><div class="tab_text"><a href="http://carlosazaustre.es/blog/como-configurar-tu-servidor-cloud-en-digitalocean/">Cómo configurar tu servidor cloud en DigitalOcean</a></div>					        </li>
+					        					        <li style="right: 0px;">
+					        	<a class="tab_attachment" href="http://carlosazaustre.es/blog/como-implementar-una-api-rest-con-mongodb-node-js-usando-express-v4/"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/nodejs-mongodb.png" alt="Cómo implementar una API REST con MongoDB + Node.js usando Express v4"></a><div class="tab_text"><a href="http://carlosazaustre.es/blog/como-implementar-una-api-rest-con-mongodb-node-js-usando-express-v4/">Cómo implementar una API REST con MongoDB + Node.js usando Express v4</a></div>					        </li>
+					        					        <li style="right: 0px;">
+					        	<a class="tab_attachment" href="http://carlosazaustre.es/blog/automatizando-tu-flujo-de-trabajo-en-el-frontend-con-gulpjs/"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/gulp-2x-60x60.png" alt="Automatizando tu flujo de trabajo en el Frontend con GulpJS"></a><div class="tab_text"><a href="http://carlosazaustre.es/blog/automatizando-tu-flujo-de-trabajo-en-el-frontend-con-gulpjs/">Automatizando tu flujo de trabajo en el Frontend con GulpJS</a></div>					        </li>
+					        					        <li style="right: 0px;">
+					        	<a class="tab_attachment" href="http://carlosazaustre.es/blog/primera-aplicacion-web-en-raspberrypi-con-nodejs-cylonjs-controlando-leds-desde-el-movil/"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/IMG_0449-60x60.jpg" alt="Primera aplicación web en RaspberryPi con NodeJS + CylonJS. Controlando LEDs desde el móvil"></a><div class="tab_text"><a href="http://carlosazaustre.es/blog/primera-aplicacion-web-en-raspberrypi-con-nodejs-cylonjs-controlando-leds-desde-el-movil/">Primera aplicación web en RaspberryPi con NodeJS + CylonJS. Controlando LEDs desde el móvil</a></div>					        </li>
+					        					        <li style="right: 0px;">
+					        	<a class="tab_attachment" href="http://carlosazaustre.es/blog/programando-en-node-js-con-raspberrypi-primeros-pasos/"><img src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/100px-Raspberry_Pi_Logo.png" alt="Programando en Node.js con RaspberryPi. Primeros pasos"></a><div class="tab_text"><a href="http://carlosazaustre.es/blog/programando-en-node-js-con-raspberrypi-primeros-pasos/">Programando en Node.js con RaspberryPi. Primeros pasos</a></div>					        </li>
+					        					</ul>
+				</div>
+					    		    <div class="tab-pane" id="bl_side_comments">
+		    	<ul><li><div class="tab_attachment"><img alt="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/28c814a4f193a26329ddf3f29901534a.png" class="avatar avatar-55 photo" width="55" height="55"></div><div class="tab_text"><a href="http://carlosazaustre.es/blog/nuestro-viaje-por-los-usa-como-viajar-de-forma-mas-barata/"><span>Carolina</span><br>Carlos, una consulta, han usado un solo unlimited ...</a></div></li><li><div class="tab_attachment"><img alt="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/7e9f91d0dd4c8b7dbd9f60197b31a054.png" class="avatar avatar-55 photo" width="55" height="55"></div><div class="tab_text"><a href="http://carlosazaustre.es/blog/ebook-angular/"><span>José Pittí</span><br>Gracias Hermano, agradecido con tu libro!
+Saludos ...</a></div></li><li><div class="tab_attachment"><img alt="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/dcadd5c56084a4f8df249b8567851ef8.png" class="avatar avatar-55 photo" width="55" height="55"></div><div class="tab_text"><a href="http://carlosazaustre.es/blog/empezando-con-angular-js/"><span>Keiwer KgVr</span><br>Solo necesitas el archivo js de Angular, con un si...</a></div></li><li><div class="tab_attachment"><img alt="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/8a2ee87fc7e624952a5b3da55f128011.jpeg" class="avatar avatar-55 photo" width="55" height="55"></div><div class="tab_text"><a href="http://carlosazaustre.es/blog/ebook-angular/"><span>oidacra</span><br>Excelente,muy buen material.</a></div></li><li><div class="tab_attachment"><img alt="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/573cbe6e46797b20b6ef954966b4f929.jpeg" class="avatar avatar-55 photo" width="55" height="55"></div><div class="tab_text"><a href="http://carlosazaustre.es/blog/ebook-angular/"><span>Carlos Azaustre</span><br>Gracias a ti :)</a></div></li></ul>		    </div>		    	    </div>
+	     
+	    <script type="text/javascript">
+	    jQuery(function () {
+		    jQuery('#bl_side_tabs a').click(function (e) {
+			    e.preventDefault();
+
+			    jQuery('.bl_tabs .tab-content ul li').css('right', '-110%');
+
+			    jQuery(this).tab('show');
+		    	jQuery(jQuery(this).attr('href')).find('li').each(function(i){
+		    		jQuery(this).delay(50*i).animate({right: '0'}, 150, 'swing');
+		    	});	
+		    });
+		    setTimeout(function(){
+				jQuery('.bl_tabs .tab-content .active ul li').each(function(i){
+					jQuery(this).delay(50*i).animate({right: '0'}, 150, 'swing');
+				});	
+		    },500)
+
+	    });
+	    </script>
+    </div>		</aside>
+					
+	</div><!-- #primary .content-area -->
+	</div><!-- #main .site-main -->
+	<footer id="colophon" class="site-footer" role="contentinfo">
+				<div class="top-color clearfix">
+			<div class="first_col"></div>
+			<div class="second_col"></div>
+			<div class="third_col"></div>
+			<div class="fourth_col"></div>
+		</div>
+				<div class="container">
+						<ul id="footer-body">
+				<li><div id="pages-2" class="widget_pages"><h3 class="widget-head">Páginas</h3>		<ul>
+			<li class="page_item page-item-747"><a href="http://carlosazaustre.es/blog/ebook-angular/">Desarrollo Web Ágil con Angular.js</a></li>
+<li class="page_item page-item-128"><a href="http://carlosazaustre.es/blog/sobre-mi/">Sobre mi</a></li>
+<li class="page_item page-item-125"><a href="http://carlosazaustre.es/blog/contacto/">Contacto</a></li>
+<li class="page_item page-item-363"><a href="http://carlosazaustre.es/blog/curriculum/">CV</a></li>
+		</ul>
+		</div></li><li><div id="archives-2" class="widget_archive"><h3 class="widget-head">Archivos</h3>		<ul>
+	<li><a href="http://carlosazaustre.es/blog/2014/07/">julio 2014</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2014/06/">junio 2014</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2014/03/">marzo 2014</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2014/02/">febrero 2014</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2014/01/">enero 2014</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2013/11/">noviembre 2013</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2013/09/">septiembre 2013</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2013/08/">agosto 2013</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2013/07/">julio 2013</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2013/06/">junio 2013</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2013/05/">mayo 2013</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2013/03/">marzo 2013</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2013/01/">enero 2013</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2012/11/">noviembre 2012</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2012/10/">octubre 2012</a></li>
+	<li><a href="http://carlosazaustre.es/blog/2012/09/">septiembre 2012</a></li>
+		</ul>
+</div></li><li><div id="text-10" class="widget_text"><h3 class="widget-head">Deja una donación</h3>			<div class="textwidget">Si te ha parecido interesante y útil el contenido de este blog, dejanos una propina para seguir adelante :)
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input name="cmd" value="_s-xclick" type="hidden">
+<input name="hosted_button_id" value="W4JGL782Z7Q6N" type="hidden">
+<input src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/btn_donate_LG.gif" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet." type="image" border="0">
+<img alt="" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/pixel.gif" width="1" height="1" border="0">
+</form>
+</div>
+		</div></li>			</ul>	
+					</div><!-- .site-info -->
+				<div class="row-fluid" id="footer-bottom">
+			Copyright © 2014 · Carlos Azaustre		</div>	
+			</footer><!-- #colophon .site-footer -->
+</div><iframe tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/postmessageRelay.html" id="oauth2relay1466224539" name="oauth2relay1466224539"></iframe><!-- #page -->
+    <script type="text/javascript">
+    // <![CDATA[
+        var disqus_shortname = 'carlosazaustre';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('rel'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) url = url[0];
+                    else url = url[1]
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    //]]>
+    </script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+   jQuery('pre code').each(function(i, e) {
+    hljs.highlightBlock(e, '    ')
+   });
+});
+</script>
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/jquery-ui.js"></script>
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/jquery_004.js"></script>
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/jquery_005.js"></script>
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/jquery_002.js"></script>
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/bootstrap.js"></script>
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/jquery.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var blu = {"site_url":"http:\/\/carlosazaustre.es\/blog","ajaxurl":"http:\/\/carlosazaustre.es\/blog\/wp-admin\/admin-ajax.php","fb_comments":"false","locale":{"email_input":"Search...","comment":"Comment","comments":"Comments","no_comments":"No Comments","no_email_provided":"No email provided!","thank_you_for_subscribing":"Thank you for subscribing!"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/theme.js"></script>
+<script type="text/javascript" src="Registro%20y%20autorizaci%C3%B3n%20de%20usuarios%20en%20Node.js%20con%20Twitter%20y%20Facebook%20-%20Carlos%20Azaustre%20%7C%20Front%20End%20Developer_files/comment-reply.js"></script>
+
+
+<iframe style="display: none;" allowtransparency="true" id="rufous-sandbox" scrolling="no" frameborder="0"></iframe></body><iframe src="" style="display: none;"></iframe></html>
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+ Served from: carlosazaustre.es @ 2014-08-14 00:31:01 by W3 Total Cache -->
