@@ -7,7 +7,8 @@
  */
 
 var home = require('./home');
-
+var user = require('./user');
 module.exports = function (app) {
     home(app);
+    user(app);
 }

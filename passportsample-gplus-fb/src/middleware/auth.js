@@ -62,7 +62,7 @@ module.exports = function(app, options){
 					passport.use(new GoogleStrategy({
 					    clientID: config.google[env].appId,
 					    clientSecret: config.google[env].appSecret,
-					    callbackURL: "http://www.pello.info:3000/auth/google/callback"
+					    callbackURL: "http://localhost:3000/auth/google/callback"
 					  },
 					  function(accessToken, refreshToken, profile, done) {
 					    // asynchronous verification, for effect...
@@ -98,8 +98,11 @@ module.exports = function(app, options){
 					));
 
 					app.get('/auth/google',
-						  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }),
-						  function(req, res){
+						 // passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }),
+							passport.authenticate('google', { successRedirect: '/',scope:
+								[ 'email', 'profile' ]
+							}),
+						function(req, res){
 							    // The request will be redirected to Google for authentication, so this
 							    // function will not be called.
 					  });

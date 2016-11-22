@@ -9,8 +9,8 @@ module.exports = {
 		},
 		google: {
 			development: {
-				appId: '17140578038-b98d2iei079u0s59qkm71rns3ljgpe72.apps.googleusercontent.com',
-				appSecret: 'blWkzVseLIhMGIry-oCpZlut',
+				appId: '615208896962-hig1i0b6sv26eo7gdilh7m7m0q0ub8o4.apps.googleusercontent.com',
+				appSecret: 'CJeamDIzteD4z7Hav04UJJFD',
 			},
 		},
 	},

@@ -22,4 +22,13 @@ module.exports = function (app) {
         res.render('admin' , {title: 'Admin users page'});
     });
 
+    // access to signin
+    app.get('/signin' , function(req, res) {
+        res.render('signin' , {title: 'Multilogin page'});
+    });
+
+    // access to local
+    app.get('/local' , function(req, res) {
+        res.render('signin' , {title: 'Multilogin page'});
+    });
 }

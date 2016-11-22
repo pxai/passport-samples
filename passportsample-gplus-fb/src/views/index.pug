@@ -6,11 +6,13 @@ html
   body
     a(href='/')= 'Home my homie'
     span= ' | '
+    a(href='/open')= 'Open page'
+    span= ' | '
     a(href='/user')= 'Logged users page'
     span= ' | '
     a(href='/admin')= 'Logged Admin users page'
     span= ' | '
-    a(href='/session/signin')= 'Sign In'
+    a(href='/signin')= 'Sign In'
     span= ' | '
     a(href='/session/signout')= 'Sign Out'
     block content
