@@ -10,7 +10,8 @@ var User = require('../models/user.js'),
 	});
 
 	passport.deserializeUser(function(id, done){
-		User.findById(id, function(err, user){
+		//User.findById(id, function(err, user){
+		User.find({iduser:id}, function(err, user){
 			if(err || !user) return done(err, null);
 			done(null, user);
 		});
