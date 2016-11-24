@@ -6,10 +6,12 @@
  * any other middleware in a different order into app.js file.
  */
 var credentials = require('../config/credentials.js');
+var sessions = require('./sessions');
 var auth;
 
 
 module.exports = function (app) {
+	app.use(sessions);
 	auth = require('./auth')(app, {
 		providers: credentials.authProviders,
 		successRedirect: '/account',
